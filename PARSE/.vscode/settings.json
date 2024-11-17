@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "sstream": "c",
+        "cube3d.h": "c"
+    }
+}
