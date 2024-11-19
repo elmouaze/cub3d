@@ -6,7 +6,7 @@
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:28:55 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/17 11:02:59 by ael-moua         ###   ########.fr       */
+/*   Updated: 2024/11/19 03:59:45 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void check_file_type(char *str)
 
     size = ft_strlen(str);
     if (size < 4 || ft_strncmp(str + (size - 4),".cub",4) != 0)
-        ft_perror("a map should be in *.cub format ");
+        ft_perror("Error");
 }
 
 int check_texture(char *file)
@@ -69,10 +69,12 @@ int wall_check(char *line)
     int i;
 
     i = 0;
+    if (!line)
+        return 1;
     while(line[i] && (line[i] == '1' || line[i] == ' ' || line[i] == '\t'))
         i++;
     if (line[i] != '\n')
-        return (printf("%c\n",line[i]),1);
+        return (1);
     return (0);
 }
 void parse_map(t_data *map, char *file)
@@ -100,9 +102,9 @@ void parse_map(t_data *map, char *file)
         free(line);
     }
     if (cpt != 6 || map->ciel_rgb < 0 || map->floor_color < 0 || wall_check(line))
-        return(ft_perror("Map problem"), close(fd), free(line)); // free textures
-    if (!(map->map = fill_map(line, fd)))
-        return ;//error
+        return(ft_perror("Error"), close(fd), free(line)); // free textures
+
+    fill_map(line, fd,map);
 }
 
 void init_map(t_data *map)
@@ -128,14 +130,16 @@ void print_data(t_data *data)
         printf("Data is NULL.\n");
         return;
     }
+    for (int i = 0; data->map[i];i++)
+        printf("%s\n",data->map[i]);
     // Print textures (if they exist)
     printf("Textures:\n");
     printf("  West: %s\n", data->WE ? data->WE : "NULL");
     printf("  North: %s\n", data->NO ? data->NO : "NULL");
     printf("  South: %s\n", data->SO ? data->SO : "NULL");
     printf("  East: %s\n", data->EA ? data->EA : "NULL");
-
     // Print color values (in decimal)
+    printf("player pos: %d %d\n",data->x_player, data->y_player);
     printf("Sky color (Ciel): %d\n", data->ciel_rgb);
     printf("Floor color: %d\n", data->floor_color);
 }
@@ -146,9 +150,11 @@ int main(int ac, char **av)
 
     (void)map;
     if (ac != 2)
-        ft_perror("invalide arguments");
+        ft_perror("Error");
     check_file_type(av[1]);
     init_map(&map);
+
     parse_map(&map, av[1]);
+
     print_data(&map);
 }

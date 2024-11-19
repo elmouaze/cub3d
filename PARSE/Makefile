@@ -6,7 +6,7 @@
 #    By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/16 22:15:17 by ael-moua          #+#    #+#              #
-#    Updated: 2024/11/17 11:03:15 by ael-moua         ###   ########.fr        #
+#    Updated: 2024/11/19 03:56:20 by ael-moua         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS)
-
+	make clean
 %.o: %.c cube3d.h
 	$(CC) $(CFLAGS) -c $< -o $@
 

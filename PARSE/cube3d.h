@@ -6,7 +6,7 @@
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:29:20 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/17 11:01:20 by ael-moua         ###   ########.fr       */
+/*   Updated: 2024/11/19 03:49:21 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 typedef struct s_map 
 {
     char            *line;
+    size_t             size;
     struct s_map    *next;
 }   t_map;
 
@@ -52,5 +53,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	**ft_split(char const *s, char c);
 void ft_free_memory(char **res);
 int	ft_atoi(const char *str);
-char  **fill_map(char *str, int fd);
+void fill_map(char *str, int fd,t_data *map);
+int	 ft_strchr(const char *s);
+void	*ft_calloc(size_t count, size_t size);
 #endif
