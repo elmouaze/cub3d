@@ -6,14 +6,13 @@
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:29:20 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/20 04:44:03 by ael-moua         ###   ########.fr       */
+/*   Updated: 2024/11/20 12:26:55 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
-# include <mlx.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -63,4 +62,7 @@ void fill_map(char *str, int fd,t_data *map);
 int	 ft_strchr(const char *s);
 void	*ft_calloc(size_t count, size_t size);
 void	*alloc(int mode, int size);
+void check_file_type(char *str);
+void parse_map(t_data *map, char *file);
+void init_map(t_data *map);
 #endif
