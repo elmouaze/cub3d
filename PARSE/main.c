@@ -6,7 +6,7 @@
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:28:55 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/20 04:29:21 by ael-moua         ###   ########.fr       */
+/*   Updated: 2024/11/20 10:35:32 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,31 +122,10 @@ void ft_perror(char *str)
     exit(1);
 }
 
-void print_data(t_data *data)
-{
-    // Check if data is NULL
-    if (!data) {
-        printf("Data is NULL.\n");
-        return;
-    }
-    for (int i = 0; data->map[i]; i++)
-        printf("%s\n",data->map[i]);
-    // Print textures (if they exist)
-    printf("Textures:\n");
-    printf("  West: %s\n", data->WE ? data->WE : "NULL");
-    printf("  North: %s\n", data->NO ? data->NO : "NULL");
-    printf("  South: %s\n", data->SO ? data->SO : "NULL");
-    printf("  East: %s\n", data->EA ? data->EA : "NULL");
-    // Print color values (in decimal)
-    printf("player pos: %d %d\n",data->x_player, data->y_player);
-    printf("Sky color (Ciel): %d\n", data->ciel_rgb);
-    printf("Floor color: %d\n", data->floor_color);
-}
 
-void f(){system("leaks cube3d");}
+
 int main(int ac, char **av)
 {
-    atexit(f);
     t_data   map;
 
     (void)map;
@@ -154,8 +133,6 @@ int main(int ac, char **av)
         ft_perror("Error");
     check_file_type(av[1]);
     init_map(&map);
-
     parse_map(&map, av[1]);
 
-    print_data(&map);
 }

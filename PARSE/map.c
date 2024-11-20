@@ -6,7 +6,7 @@
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 09:09:31 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/20 04:41:29 by ael-moua         ###   ########.fr       */
+/*   Updated: 2024/11/20 10:25:43 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ void player_handler(int x, int y , t_data *data)
         ft_perror("Error");
     data->x_player = x;
     data->y_player = y;
-
 }
+
 void check_map(char **map,t_data *data)
 {
     int i;
@@ -145,6 +145,8 @@ void build_map(t_map *map, int size,size_t width,t_data *data)
         i++;
     }
     res[i] = NULL;
+    data->map_hieght = size;
+    data->map_width = width;
     check_map(res,data);
 }
 
