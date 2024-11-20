@@ -6,7 +6,7 @@
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 05:07:24 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/17 05:20:23 by ael-moua         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:18:50 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	ft_free_memory(char **res)
 	int	i;
 
 	i = 0;
+	if (!res)
+		return;
 	while (res[i])
 	{
 		free(res[i]);

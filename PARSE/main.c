@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:28:55 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/19 03:59:45 by ael-moua         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:29:21 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,13 @@ int check_texture(char *file)
         return (0);
     return (1);
 }
+
 int convert_rgb(char *color)
 {
     char **colors;
-    int red,green,blue;
+    int red;
+    int green;
+    int blue;
 
     colors = ft_split(color,',');
     if (!colors || !colors[0] || !colors[1] || !colors[2] || colors[3])
@@ -50,13 +53,13 @@ int convert_rgb(char *color)
 int check_line(char *tmp, t_data *map)
 {
     if (ft_strncmp(tmp, "WE ", 2) == 0 && !map->WE) 
-        return (map->WE = ft_strtrim(tmp + 3," \t"),check_texture(map->WE));
+        return (map->WE = ft_strtrim(tmp + 3," \t"), check_texture(map->WE));
     else  if (ft_strncmp(tmp, "NO ", 2) == 0 && !map->NO)
-        return (map->NO = ft_strtrim(tmp + 3," \t"),check_texture(map->NO));
+        return (map->NO = ft_strtrim(tmp + 3," \t"), check_texture(map->NO));
     else  if (ft_strncmp(tmp, "SO ", 2) == 0 && !map->SO)
-        return (map->SO = ft_strtrim(tmp + 3," \t"),check_texture(map->SO));
+        return (map->SO = ft_strtrim(tmp + 3," \t"), check_texture(map->SO));
     else  if (ft_strncmp(tmp, "EA ", 2) == 0 && !map->EA)
-        return (map->EA = ft_strtrim(tmp + 3," \t"),check_texture(map->EA));
+        return (map->EA = ft_strtrim(tmp + 3," \t"), check_texture(map->EA));
     else  if (ft_strncmp(tmp, "C ", 1) == 0)
         return (map->ciel_rgb = convert_rgb(tmp + 2));
     else  if (ft_strncmp(tmp, "F ",1) == 0)
@@ -81,7 +84,7 @@ void parse_map(t_data *map, char *file)
 {
     int fd,cpt = 0;
     char *line, *tmp;
-    (void)map;
+
     fd = open(file, O_RDONLY);
     if (fd < 0)
         return (ft_perror("open file failed"));
@@ -93,17 +96,12 @@ void parse_map(t_data *map, char *file)
             if (check_line(tmp,map))
                 cpt++;
             else 
-            {
-                free(tmp);
                 break;
-            }
         }
-        free(tmp);
         free(line);
     }
     if (cpt != 6 || map->ciel_rgb < 0 || map->floor_color < 0 || wall_check(line))
-        return(ft_perror("Error"), close(fd), free(line)); // free textures
-
+        return(close(fd), free(line), ft_perror("Error")); 
     fill_map(line, fd,map);
 }
 
@@ -120,6 +118,7 @@ void init_map(t_data *map)
 void ft_perror(char *str)
 {
     printf("%s\n",str);
+    alloc(0,0);
     exit(1);
 }
 
@@ -130,7 +129,7 @@ void print_data(t_data *data)
         printf("Data is NULL.\n");
         return;
     }
-    for (int i = 0; data->map[i];i++)
+    for (int i = 0; data->map[i]; i++)
         printf("%s\n",data->map[i]);
     // Print textures (if they exist)
     printf("Textures:\n");
@@ -144,8 +143,10 @@ void print_data(t_data *data)
     printf("Floor color: %d\n", data->floor_color);
 }
 
+void f(){system("leaks cube3d");}
 int main(int ac, char **av)
 {
+    atexit(f);
     t_data   map;
 
     (void)map;

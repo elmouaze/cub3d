@@ -6,7 +6,7 @@
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 09:07:44 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/16 23:50:28 by ael-moua         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:28:03 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ char	*ft_strtrim(char *s1, char const *set)
 		end--;
 	if (index >= end)
 		return (NULL);
-	res = (char *)malloc (sizeof(char) * (end - index + 1));
+	res = (char *)alloc (1,sizeof(char) * (end - index + 1));
 	if (!res)
-		return (NULL);
+		return (alloc(0,0));
 	ft_strlcpy(res, &s1[index], end - index + 1);
 	return (res);
 }

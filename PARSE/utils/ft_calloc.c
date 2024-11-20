@@ -6,7 +6,7 @@
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 03:16:03 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/19 03:18:00 by ael-moua         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:40:59 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	void	*p;
 
-	p = (void *)malloc(size * count);
+	p = (void *)alloc(1,size * count);
 	if (!p)
-		return (NULL);
+		alloc(0,0);
 	ft_bzero(p, count * size);
 	return (p);
 }
