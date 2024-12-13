@@ -27,7 +27,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS)  $(FRAMEWORK) -o $@ $(OBJS)
-	make clean
+	
 %.o: %.c cube3d.h
 	$(CC) $(CFLAGS) -c $< -o $@
 

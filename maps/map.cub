@@ -1,11 +1,11 @@
 
-SO                ./maps/2.png
-NO                ./maps/1.png
-EA                ./maps/4.png
-WE                ./maps/3.png
+SO                ./textures/2.png
+NO                ./textures/1.png
+EA                ./textures/4.png
+WE                ./textures/3.png
 
 F                126,204,103
-C                119,181,254
+C                0,0,255
 
                                              1                                    1
                                             101                                  101
@@ -103,4 +103,4 @@ C                119,181,254
        100000011       10000001
         100001          100001
          1001            1001
-          11              11
+          1111            1111

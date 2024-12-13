@@ -88,8 +88,8 @@ void player_handler(int x, int y , t_data *data)
 {
     if (data->x_player != -1)
         ft_perror("Error");
-    data->x_player = x;
-    data->y_player = y;
+    data->x_player = y;
+    data->y_player = x;
 }
 
 void check_map(char **map,t_data *data)
@@ -106,7 +106,10 @@ void check_map(char **map,t_data *data)
         {
             player = is_player(map[i][j]);
             if (player)
+			{
                 player_handler(i , j,data);
+				map[i][j] = '0';
+			}
             if ((map[i][j] == '0' || player) && 
                 (j == 0 || map[i][j - 1] == ' '))// left
                 ft_perror("Error");

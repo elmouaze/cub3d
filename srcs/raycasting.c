@@ -64,6 +64,18 @@ uint32_t    get_texture_color(mlx_texture_t	*tex, int x, int y)
     return (pixels[index + 3] << 24) | (pixels[index + 0] << 16) | (pixels[index + 1] << 8) | (pixels[index + 2]);
 }
 
+uint32_t 	get_rgb(uint32_t rgb)
+{
+    // uint8_t red   = (rgb >> 16) & 0xFF;
+    // uint8_t green = (rgb >> 8) & 0xFF; 
+    // uint8_t blue  = rgb & 0xFF; 
+
+	// uint32_t rgba = (red << 24) | (green << 16) | (blue << 8) | 1;
+	// return rgba;
+	return (rgb << 8) | 150;
+
+}
+
 void	render_walls(t_cub *cub, int x) // TODO add prefix PART 1 part n
 {
 	mlx_texture_t	*texture;
@@ -90,6 +102,14 @@ void	render_walls(t_cub *cub, int x) // TODO add prefix PART 1 part n
         tex_x = texture->width - tex_x - 1;
     tex_x = fmax(0, fmin(tex_x, texture->width - 1));
     int y = wall_top;
+
+
+	int i = 0;
+	while (i < y)
+	{
+        mlx_put_pixel(cub->img, x, i++, get_rgb(cub->ceilling_color));
+		i++;
+	}
     while (y < wall_bottom)
     {
         float distance_from_top = y - ((S_H / 2) - ((int)wall_height / 2));
@@ -99,6 +119,12 @@ void	render_walls(t_cub *cub, int x) // TODO add prefix PART 1 part n
         unsigned int color = get_texture_color(texture, (int)tex_x, (int)tex_y);
         mlx_put_pixel(cub->img, x, y++, color);
     }
+	i = wall_bottom;
+	while (i < S_H)
+	{
+        mlx_put_pixel(cub->img, x, i++, get_rgb(cub->floor_color));
+		i++;
+	}
 }
 
 void	cast_all_rays(t_cub *cub)

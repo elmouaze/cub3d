@@ -11,7 +11,41 @@
 /* ************************************************************************** */
 
 #include "include/cub3d.h"
+
 #include "PARSE/cube3d.h"
+
+
+void	trans_data(t_data *data, t_cub *cub)
+{
+	cub->pl.l_r = 0;
+	cub->pl.rot_angle = PI;
+	cub->pl.size = 0;
+	cub->pl.u_d = 0;
+	cub->cur_frame = 0;
+	cub->pl_action = 0;
+	
+	 cub->map.height = data->map_hieght;
+	 cub->map.width = data->map_width;
+	 cub->pl.x = data->x_player * SQR_SIZE;
+	 cub->pl.y = data->y_player * SQR_SIZE; 
+	 cub->map.map2d= data->map;
+	 cub->textures[0] = mlx_load_png(data->NO);
+	 cub->textures[1] = mlx_load_png(data->SO);
+	 cub->textures[2] = mlx_load_png(data->WE);
+	 cub->textures[3] = mlx_load_png(data->EA);
+
+	if (!cub->textures[0] || !cub->textures[1] || !cub->textures[2] || !cub->textures[3])
+	{
+		exit(1);
+	}
+
+	cub->ceilling_color = data->ciel_rgb;
+	cub->floor_color = data->floor_color;
+
+
+	cub->mouse = false;
+}
+
 void print_data(t_data *data)
 {
     if (data == NULL)
@@ -55,26 +89,8 @@ int main(int ac, char **av)
     check_file_type(av[1]);
     init_map(&map);
     parse_map(&map, av[1]);
-    print_data(&map);
 	
-	cub.pl.l_r = 0;
-	cub.pl.rot_angle = PI;
-	cub.pl.size = 0;
-	cub.pl.u_d = 0;
-	cub.cur_frame = 0;
-	cub.pl_action = 0;
-	
-	 cub.map.height = map.map_hieght;
-	 cub.map.width = map.map_width;
-	 cub.pl.x = map.x_player;
-	 cub.pl.y = map.y_player; 
-	 cub.map.map2d=map.map;
-	 cub.textures[0] = mlx_load_png(map.NO);
-	 cub.textures[1] = mlx_load_png(map.SO);
-	 cub.textures[2] = mlx_load_png(map.WE);
-	 cub.textures[3] = mlx_load_png(map.EA);
-	cub.ceilling_color =map.ciel_rgb;
-	cub.floor_color = map.floor_color;
+	trans_data(&map, &cub);
 
 	cub.mouse = false;
 	
