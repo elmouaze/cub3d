@@ -65,4 +65,6 @@ void	*alloc(int mode, int size);
 void check_file_type(char *str);
 void parse_map(t_data *map, char *file);
 void init_map(t_data *map);
+char	*ft_itoa(int n);
+
 #endif

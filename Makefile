@@ -12,7 +12,7 @@
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror  -std=c17
 
 SRCS = main.c $(wildcard srcs/*.c) $(wildcard PARSE/*.c) $(wildcard PARSE/utils/*.c) $(wildcard PARSE/gnl/*.c)
 

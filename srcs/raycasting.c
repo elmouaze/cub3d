@@ -64,18 +64,6 @@ uint32_t    get_texture_color(mlx_texture_t	*tex, int x, int y)
     return (pixels[index + 3] << 24) | (pixels[index + 0] << 16) | (pixels[index + 1] << 8) | (pixels[index + 2]);
 }
 
-uint32_t 	get_rgb(uint32_t rgb)
-{
-    // uint8_t red   = (rgb >> 16) & 0xFF;
-    // uint8_t green = (rgb >> 8) & 0xFF; 
-    // uint8_t blue  = rgb & 0xFF; 
-
-	// uint32_t rgba = (red << 24) | (green << 16) | (blue << 8) | 1;
-	// return rgba;
-	return (rgb << 8) | 150;
-
-}
-
 void	render_walls(t_cub *cub, int x) // TODO add prefix PART 1 part n
 {
 	mlx_texture_t	*texture;
@@ -107,7 +95,7 @@ void	render_walls(t_cub *cub, int x) // TODO add prefix PART 1 part n
 	int i = 0;
 	while (i < y)
 	{
-        mlx_put_pixel(cub->img, x, i++, get_rgb(cub->ceilling_color));
+        mlx_put_pixel(cub->img, x, i++, cub->ceilling_color);
 		i++;
 	}
     while (y < wall_bottom)
@@ -122,7 +110,7 @@ void	render_walls(t_cub *cub, int x) // TODO add prefix PART 1 part n
 	i = wall_bottom;
 	while (i < S_H)
 	{
-        mlx_put_pixel(cub->img, x, i++, get_rgb(cub->floor_color));
+        mlx_put_pixel(cub->img, x, i++, cub->floor_color);
 		i++;
 	}
 }

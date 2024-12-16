@@ -11,9 +11,13 @@
 /* ************************************************************************** */
 
 #include "include/cub3d.h"
-
 #include "PARSE/cube3d.h"
+#include <stdlib.h>
 
+uint32_t 	get_rgb(uint32_t rgb)
+{
+	return (rgb << 8) | 255;
+}
 
 void	trans_data(t_data *data, t_cub *cub)
 {
@@ -39,8 +43,8 @@ void	trans_data(t_data *data, t_cub *cub)
 		exit(1);
 	}
 
-	cub->ceilling_color = data->ciel_rgb;
-	cub->floor_color = data->floor_color;
+	cub->ceilling_color = get_rgb(data->ciel_rgb);
+	cub->floor_color = get_rgb(data->floor_color);
 
 
 	cub->mouse = false;
@@ -79,6 +83,23 @@ void print_data(t_data *data)
     }
 }
 
+void	import_sprites(t_cub *cub)
+{
+	int i;
+	char *path = ft_strndup("./frames/", 9);
+
+	i = 0;
+	while (i < FRAMES)
+	{
+		char *png_path = ft_strjoin(path, ft_strjoin(ft_itoa(i), ft_strndup(".png", 4)));
+		printf("PNG path : %s\n", png_path);
+		cub->anim[i] = mlx_load_png(png_path);
+		if (!cub->anim[i])
+			exit(1);
+		i++;
+	}
+}
+
 int main(int ac, char **av)
 {
 	t_cub	cub;
@@ -94,8 +115,11 @@ int main(int ac, char **av)
 
 	cub.mouse = false;
 	
+	printf("%s\n", "after\n");
+	import_sprites(&cub);
+
+
 	cub.mlx = mlx_init(S_W, S_H, "cub3d", 0);
-	//import_freams(&cub);
 	start_the_game(&cub);
 	mlx_loop(cub.mlx);
 }
