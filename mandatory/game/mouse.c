@@ -28,10 +28,19 @@ void	cursor_handler(double xpos, double ypos, void *param)
 {
 	t_cub *cub;
 
-	(void)ypos;
-	cub = (t_cub*)param;
-	if (xpos > S_W / 2)
-		cub->pl.rot = -1;
+	cub = (t_cub*) param;
+
+	if (cub->mouse)
+	{
+		(void)ypos;
+		cub = (t_cub*)param;
+		if (xpos > S_W / 2)
+			cub->pl.rot = -1;
+		else
+			cub->pl.rot = 1;
+	}
 	else
-		cub->pl.rot = 1;
+	{
+			cub->pl.rot = 0;
+	}
 }

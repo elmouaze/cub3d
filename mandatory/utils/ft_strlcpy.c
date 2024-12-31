@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 14:59:32 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/18 19:22:01 by ael-moua         ###   ########.fr       */
+/*   Created: 2023/11/06 23:03:28 by ael-moua          #+#    #+#             */
+/*   Updated: 2024/11/16 23:50:44 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube3d.h"
+#include "cube3d.h"
 
-int ft_strchr(const char *s)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-    int index;
+	size_t	l;
+	size_t	i;
 
-    index = 0;
-	while (s[index])
+	l = ft_strlen(src);
+	i = 0;
+	if (dstsize == 0)
+		return (l);
+	if (dstsize > 0)
 	{
-		if (s[index] == 'N' || s[index] == 'S' || s[index] == 'E' || s[index] == 'W')
-			return (index);
-		index++;
+		dstsize -= 1;
+		while (dstsize && src[i])
+		{
+			dst[i] = src[i];
+			i++;
+			dstsize--;
+		}
+		dst[i] = '\0';
 	}
-	return (-1);
+	return (l);
 }

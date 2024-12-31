@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-#include "../PARSE/cube3d.h"
+#include "cube3d.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {

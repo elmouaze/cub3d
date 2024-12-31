@@ -164,9 +164,9 @@ void minimap(t_cub *cub)
 
 void start_the_game(t_cub *cub)
 {
-	// mlx_set_mouse_pos(cub->mlx, 0,0);
+	mlx_set_mouse_pos(cub->mlx, S_W / 2, S_H / 2);
 	mlx_loop_hook(cub->mlx, &game_loop, cub);
 	mlx_key_hook(cub->mlx, &key_handler, cub);
-	// mlx_mouse_hook(cub->mlx, &mouse_handler, cub);
-	// mlx_cursor_hook(cub->mlx, &cursor_handler, cub);
+	mlx_mouse_hook(cub->mlx, &mouse_handler, cub);
+	mlx_cursor_hook(cub->mlx, &cursor_handler, cub);
 }

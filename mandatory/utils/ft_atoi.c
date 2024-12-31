@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube3d.h"
+#include "cube3d.h"
+
 int	ft_atoi(const char *str)
 {
 	unsigned long long	res;

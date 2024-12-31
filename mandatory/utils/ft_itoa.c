@@ -1,6 +1,6 @@
 
 
-#include "../cube3d.h"
+#include "cube3d.h"
 
 
 static size_t	count_digits(long n)

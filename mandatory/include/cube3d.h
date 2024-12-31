@@ -17,7 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "gnl/get_next_line.h"
+# include "get_next_line.h"
 # include <unistd.h>
 
 typedef struct s_map 

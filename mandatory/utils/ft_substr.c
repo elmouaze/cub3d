@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 03:16:03 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/20 04:40:59 by ael-moua         ###   ########.fr       */
+/*   Created: 2024/11/17 03:43:19 by ael-moua          #+#    #+#             */
+/*   Updated: 2024/11/17 03:43:36 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "../cube3d.h"
-
-void	ft_bzero(void *s, size_t n)
+#include "cube3d.h"
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	index;
+	char			*p;
+	int				index;
+	unsigned int	size;
 
+	size = (unsigned int) ft_strlen(s);
 	index = 0;
-	while (n > index)
-	{
-		((char *)s)[index] = 0;
-		index++;
-	}
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*p;
-
-	p = (void *)alloc(1,size * count);
+	if (len > size - start)
+		len = size - start;
+	if (start > size)
+		len = 0;
+	p = (char *) malloc(sizeof(char) * (len + 1));
 	if (!p)
-		alloc(0,0);
-	ft_bzero(p, count * size);
+		return (NULL);
+	if (size >= start)
+	{
+		while (s[start] != '\0' && len)
+		{
+			p[index++] = s[start++];
+			len--;
+		}
+	}
+	p[index] = '\0';
 	return (p);
 }

@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "include/cub3d.h"
-#include "PARSE/cube3d.h"
+#include "cube3d.h"
+#include "cub3d.h"
 #include <stdlib.h>
 
 uint32_t 	get_rgb(uint32_t rgb)

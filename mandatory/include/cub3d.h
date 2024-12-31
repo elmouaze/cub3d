@@ -1,3 +1,6 @@
+#ifndef CUB3D_H
+#define CUB3D_H
+
 #include <libc.h>
 #include "MLX42.h"
 #include "errno.h"
@@ -167,3 +170,6 @@ void print_error(char *str,int exit_flag);
 char **get_the_map(char *map_file);
 
 
+
+
+#endif /* CUB3D_H */
