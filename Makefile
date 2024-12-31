@@ -12,10 +12,10 @@
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror  -std=c17 -Imandatory/include/ -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror  -std=c17 -Imandatory/include/ 
 
 SRCS = mandatory/main.c $(wildcard mandatory/game/*.c) $(wildcard mandatory/parse/*.c)\
-$(wildcard mandatory/utils/*.c) $(wildcard mandatory/parse/gnl/*.c)
+$(wildcard mandatory/utils/*.c) $(wildcard mandatory/parse/get_next_line/*.c)
 
 OBJS = $(SRCS:.c=.o)
 MLX_LIB = libs/libmlx42.a
