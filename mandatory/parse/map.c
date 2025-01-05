@@ -20,7 +20,7 @@ static char	*ft_fill(char *str)
 	index = 0;
 	if (!str)
 		return (NULL);
-	res = alloc (1,ft_strlen(str) + 1);
+	res = alloc (1, ft_strlen(str) + 1);
 	if (!res)
 		return (alloc(0,0), NULL);
 	while (str[index] != '\0')
@@ -80,7 +80,7 @@ int is_player(char c)
 {
     if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
-    if (c != '0' && c != '1' && c != ' ')
+    if (c != '0' && c != '1' && c != ' ' && c != 'D')
         return (ft_perror("Error"), 1);
     return (0);
 }

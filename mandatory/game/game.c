@@ -156,6 +156,8 @@ void minimap(t_cub *cub)
                 draw_2d_tile(cub, x, y, MINIMAPS, GREEN);
             else if (gridx == plx && gridy == ply)
                 draw_2d_tile(cub, x, y, MINIMAPS, MAGENTA);
+            else if (cub->map.map2d[gridy][gridx] == 'D')
+                draw_2d_tile(cub, x, y, MINIMAPS, YELLOW);
             else
                 draw_2d_tile(cub, x, y, MINIMAPS, BLACK);
         }

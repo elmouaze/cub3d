@@ -12,6 +12,8 @@
 
 #include "../include/cub3d.h"
 
+#define DOOR_OPEN_DIST 2
+
 double		norm_angle(double angle)
 {
 	if (angle < 0)
@@ -21,26 +23,37 @@ double		norm_angle(double angle)
 	return (angle);
 }
 
-bool	wall_inter(t_cub *cub, double x, double y)
+bool wall_inter(t_cub *cub, double x, double y)
 {
-	long xm, ym;
+    if (x < 0 || y < 0)
+        return true;
 
-	if (x < 0 || y < 0)
-		return (true);
-	xm = floor(x / SQR_SIZE);
-	ym = floor(y / SQR_SIZE);
-	
-	if (xm < 0 || xm >= cub->map.width || ym < 0 || ym >= cub->map.height)
-	    return (true);
-	if (cub->map.map2d[ym][xm] == '1')
-	{
-		return (true);
-	}
-	return (false);
+    long xm = (long)(floor(x) / SQR_SIZE);
+    long ym = (long)(floor(y) / SQR_SIZE);
+
+    if (xm < 0 || ym < 0 || xm >= cub->map.width || ym >= cub->map.height)
+        return true;
+    char cell = cub->map.map2d[ym][xm];
+
+    if (cell == '1')
+        return true;
+
+    if (cell == 'D') {
+        long xp = (long)(cub->pl.x / SQR_SIZE);
+        long yp = (long)(cub->pl.y / SQR_SIZE);
+
+        if (labs(xm - xp) < DOOR_OPEN_DIST && labs(ym - yp) < DOOR_OPEN_DIST)
+            return false;
+        cub->is_door = true;
+        return true;
+    }
+    return false;
 }
 
 mlx_texture_t	*get_texture(t_cub *cub)
 {
+	if (cub->is_door == true)
+		return (cub->door);
 	if (cub->ray.is_vertical)
 	{
 		if (cub->ray.right)
@@ -60,7 +73,7 @@ mlx_texture_t	*get_texture(t_cub *cub)
 uint32_t    get_texture_color(mlx_texture_t	*tex, int x, int y)
 {
     unsigned char *pixels = tex->pixels;
-    int index = (y * tex->width + x) * 4;  
+    int index = (y * tex->width + x) * 4; 
     return (pixels[index + 3] << 24) | (pixels[index + 0] << 16) | (pixels[index + 1] << 8) | (pixels[index + 2]);
 }
 
@@ -73,7 +86,7 @@ void	render_walls(t_cub *cub, int x) // TODO add prefix PART 1 part n
     float wall_height = (SQR_SIZE / cub->ray.distance) * dist_p;
     int wall_top = (S_H / 2) - ((int)wall_height / 2);
     int wall_bottom = (S_H / 2) + ((int)wall_height / 2);
-    //int original_wall_top = wall_top;
+
 	if (wall_top < 0)
 		wall_top = 0;
 	if (wall_bottom >= S_H)
@@ -90,7 +103,7 @@ void	render_walls(t_cub *cub, int x) // TODO add prefix PART 1 part n
         tex_x = texture->width - tex_x - 1;
     tex_x = fmax(0, fmin(tex_x, texture->width - 1));
     int y = wall_top;
-
+	float distance_from_top = ((S_H / 2) - ((int)wall_height / 2));
 
 	int i = 0;
 	while (i < y)
@@ -100,8 +113,7 @@ void	render_walls(t_cub *cub, int x) // TODO add prefix PART 1 part n
 	}
     while (y < wall_bottom)
     {
-        float distance_from_top = y - ((S_H / 2) - ((int)wall_height / 2));
-        float normalized_y = distance_from_top / wall_height;
+        float normalized_y = (y - distance_from_top) / wall_height;
         float tex_y = normalized_y * texture->height;
         tex_y = fmax(0, fmin(tex_y, texture->height - 1));
         unsigned int color = get_texture_color(texture, (int)tex_x, (int)tex_y);
@@ -123,9 +135,9 @@ void	cast_all_rays(t_cub *cub)
 
 
 	cub->ray.ray_ngl =  (cub->pl.rot_angle - ( FOV / 2));
-	while (i  < S_W)
+	while (i < S_W)
 	{
-	
+		cub->is_door = false;
 		cub->ray.ray_ngl = norm_angle(cub->ray.ray_ngl);
 		cub->ray.up = (cub->ray.ray_ngl >= 0 && cub->ray.ray_ngl < M_PI);
 		cub->ray.down = !cub->ray.up;
@@ -142,7 +154,9 @@ void	cast_all_rays(t_cub *cub)
 		else
 		{
 		   cub->ray.distance = v_inter;
-			 cub->ray.is_vertical = true;
+			cub->ray.is_vertical = true;
+			 cub->is_door = false;
+  
 		}
 		
 		cub->ray.distance *= cos(norm_angle(cub->ray.ray_ngl - cub->pl.rot_angle));

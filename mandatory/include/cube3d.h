@@ -53,7 +53,7 @@ typedef struct s_data
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const char *s);
 void ft_perror(char *str);
-char	*ft_strtrim(char *s1, char const *set);
+char	*ft_strtrim(const char *s1, const char *set);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	**ft_split(char const *s, char c);
 void ft_free_memory(char **res);

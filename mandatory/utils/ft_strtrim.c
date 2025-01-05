@@ -12,41 +12,44 @@
 
 #include "cube3d.h"
 
-static int	is_sep(char c, char const	*s)
+static int	check_the_set(char c, const char *set)
 {
-	int	index;
+	int		i;
 
-	index = 0;
-	while (s[index] != '\0')
+	i = 0;
+	while (set[i] != '\0')
 	{
-		if (s[index] == c)
+		if (set[i] == c)
 			return (1);
-		index++;
+		i++;
 	}
 	return (0);
 }
 
-char	*ft_strtrim(char *s1, char const *set)
+char	*ft_strtrim(const char *s1, const char *set)
 {
-	char	*res;
-	int		index;
+	int		start;
 	int		end;
+	int		trk;
+	char	*str;
 
-	if (!s1 || !set)
+	start = 0;
+	end = 0;
+	trk = 0;
+	if (!set || !s1)
 		return (NULL);
+	while (s1[start] && check_the_set(s1[start], set))
+		start++;
 	end = ft_strlen(s1);
-	if (end == 0)
-		return (NULL);
-	index = 0;
-	while (is_sep(s1[index], set) == 1 && s1[index] != '\0')
-		index++;
-	while (is_sep(s1[end - 1], set) == 1 && end >= index)
+	while (end > start && check_the_set(s1[end - 1], set))
 		end--;
-	if (index >= end)
+	str = (char *)malloc(sizeof(char) * (end - start + 1));
+	if (!str)
 		return (NULL);
-	res = (char *)alloc (1,sizeof(char) * (end - index + 1));
-	if (!res)
-		return (alloc(0,0));
-	ft_strlcpy(res, &s1[index], end - index + 1);
-	return (res);
+	while (start < end)
+	{
+		str[trk++] = s1[start++];
+	}
+	str[trk] = '\0';
+	return (str);
 }

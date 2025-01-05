@@ -15,7 +15,7 @@
 #include "cub3d.h"
 #include <stdlib.h>
 
-uint32_t 	get_rgb(uint32_t rgb)
+uint32_t 	get_rgba(uint32_t rgb)
 {
 	return (rgb << 8) | 255;
 }
@@ -28,6 +28,7 @@ void	trans_data(t_data *data, t_cub *cub)
 	cub->pl.u_d = 0;
 	cub->cur_frame = 0;
 	cub->pl_action = 0;
+	cub->is_door = false;
 	
 	 cub->map.height = data->map_hieght;
 	 cub->map.width = data->map_width;
@@ -38,14 +39,15 @@ void	trans_data(t_data *data, t_cub *cub)
 	 cub->textures[1] = mlx_load_png(data->SO);
 	 cub->textures[2] = mlx_load_png(data->WE);
 	 cub->textures[3] = mlx_load_png(data->EA);
+	 cub->door = mlx_load_png("./textures/door.png");
 
 	if (!cub->textures[0] || !cub->textures[1] || !cub->textures[2] || !cub->textures[3])
 	{
 		exit(1);
 	}
 
-	cub->ceilling_color = get_rgb(data->ciel_rgb);
-	cub->floor_color = get_rgb(data->floor_color);
+	cub->ceilling_color = get_rgba(data->ciel_rgb);
+	cub->floor_color = get_rgba(data->floor_color);
 
 
 	cub->mouse = false;

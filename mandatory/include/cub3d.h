@@ -7,17 +7,9 @@
 // #include <mlx.h>
 #include <math.h>
 
-#define HEIGHT  00
-#define WIDTH   1040
-
 #define MINI_TILE 10
 #define MINI_W  MINI_TILE * 10
 #define MINI_H   MINI_TILE * 10
-
-
-#define	LINE_SIZE  5
-// #define S_W	(10 * SQR_SIZE)
-// #define S_H (10 * SQR_SIZE)
 
 #define S_W	1400
 #define S_H 800
@@ -29,12 +21,10 @@
 // #define MAP_H  10
 
 #define MINIMAPS        10
-#define	SQR_SIZE		70
+#define	SQR_SIZE	    35
 #define	PI 				M_PI
-#define	PLAYER_R		8
 #define PLAYER_SPEED	5
-#define ROT_SPEED		(2 * (PI / 180))
-#define	MOV_SPEED		2
+#define ROT_SPEED		(3 * (PI / 180))
 #define FOV				((60 * PI) / 180)
 #define	NUM_RAYS		S_W
 
@@ -132,9 +122,13 @@ typedef struct cub
     int				cur_frame;
     mlx_texture_t   *anim[FRAMES];
     mlx_texture_t   *textures[4];
+    mlx_texture_t   *door;
 
 	bool			pl_action;
 	bool			mouse;
+    bool            v_is_door;
+    bool            h_is_door;
+    bool            is_door;
 
 	mlx_image_t		*img;
 
@@ -168,6 +162,7 @@ void	cast_all_rays(t_cub *cub);
 
 void print_error(char *str,int exit_flag);
 char **get_the_map(char *map_file);
+uint32_t 	get_rgba(uint32_t rgb);
 
 
 

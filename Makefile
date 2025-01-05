@@ -10,9 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
+CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror  -std=c17 -Imandatory/include/ 
+CFLAGS = -Wall -Wextra -Werror -g3 -std=c17 -Imandatory/include/ -fsanitize=address
 
 SRCS = mandatory/main.c $(wildcard mandatory/game/*.c) $(wildcard mandatory/parse/*.c)\
 $(wildcard mandatory/utils/*.c) $(wildcard mandatory/parse/get_next_line/*.c)
