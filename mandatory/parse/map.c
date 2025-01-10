@@ -6,7 +6,7 @@
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 09:09:31 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/20 10:25:43 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/10 03:58:37 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void check_map(char **map,t_data *data)
 {
     int i;
     int j;
-    int player;
     i = 0;
    
     while(map[i])   
@@ -104,22 +103,21 @@ void check_map(char **map,t_data *data)
         j = 0;
         while (map[i][j])
         {
-            player = is_player(map[i][j]);
-            if (player)
+            if (is_player(map[i][j]))
 			{
                 player_handler(i , j,data);
 				map[i][j] = '0';
 			}
-            if ((map[i][j] == '0' || player) && 
+            if ((map[i][j] == '0' || map[i][j] == 'D') && 
                 (j == 0 || map[i][j - 1] == ' '))// left
                 ft_perror("Error");
-            else if ((map[i][j] == '0' || player) && 
+            else if ((map[i][j] == '0' || map[i][j] == 'D') && 
                 (map[i][j + 1] == 0 || map[i][j + 1] == ' '))// right
                  ft_perror("Error");
-            else if ((map[i][j] == '0' || player) && 
+            else if ((map[i][j] == '0' || map[i][j] == 'D') && 
                 (i == 0 || map[i - 1][j] == ' '|| map[i - 1][j] == 0 )) //up
                  ft_perror("Error");
-            else if ((map[i][j] == '0' || player) && 
+            else if ((map[i][j] == '0' || map[i][j] == 'D') && 
                 (!map[i + 1] || map[i + 1][j] == ' ' || map[i + 1][j] == 0))//down
                  ft_perror("Error");
             j++;

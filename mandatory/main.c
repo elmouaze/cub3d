@@ -6,7 +6,7 @@
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:29:35 by abennar           #+#    #+#             */
-/*   Updated: 2024/11/20 14:08:16 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/10 04:03:29 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,15 +113,9 @@ int main(int ac, char **av)
     check_file_type(av[1]);
     init_map(&map);
     parse_map(&map, av[1]);
-	
 	trans_data(&map, &cub);
-
 	cub.mouse = false;
-	
-	printf("%s\n", "after\n");
 	import_sprites(&cub);
-
-
 	cub.mlx = mlx_init(S_W, S_H, "cub3d", 0);
 	start_the_game(&cub);
 	mlx_loop(cub.mlx);

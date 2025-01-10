@@ -6,7 +6,7 @@
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:28:55 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/20 13:56:00 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/10 04:03:23 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,21 +95,15 @@ void parse_map(t_data *map, char *file)
         if (tmp && ft_strlen(tmp) > 0)
         {
             if (check_line(tmp,map) == 1)
-            {   
-                printf("tmp = %s\n",tmp);
                 cpt++;
-            }
             else 
-            {
-                printf("break cpt = %d\n",cpt);
                 break;
-            }
         }
         free(line);
         line = NULL;
     }
     if (cpt != 6 || map->ciel_rgb < 0 || map->floor_color < 0 || wall_check(line))
-        return(close(fd), free(line), ft_perror("Error5")); 
+        return(close(fd), free(line), ft_perror("Error")); 
     fill_map(line, fd,map);
 }
 
@@ -133,19 +127,3 @@ void ft_perror(char *str)
     alloc(0,0);
     exit(1);
 }
-
-
-
-
-// int main(int ac, char **av)
-// {
-//     t_data   map;
-
-//     (void)map;
-//     if (ac != 2)
-//         ft_perror("Error");
-//     check_file_type(av[1]);
-//     init_map(&map);
-//     parse_map(&map, av[1]);
-//     print_data(&map);
-// }
