@@ -28,7 +28,6 @@ static char	*eter_line(char **line)
 		i++;
 	r_line = ft_strndup(str, i);
 	*line = ft_strndup((str + i), ft_strlen(str + i));
-	m_free(str);
 	return (r_line);
 }
 
@@ -41,10 +40,10 @@ char	*get_next_line(int fd)
 	if (fd < 0)
 		return (errno = EBADF, NULL);
 	if (read(fd, 0, 0) == -1)
-		return (m_free(line), line = NULL, NULL);
-	buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+		return (line = NULL, NULL);
+	buff = (char *)alloc(1, sizeof(char) * BUFFER_SIZE + 1);
 	if (!buff)
-		return (m_free(line), line = NULL, NULL);
+		return (line = NULL, NULL);
 	r = 1;
 	while (r > 0)
 	{
@@ -56,6 +55,5 @@ char	*get_next_line(int fd)
 		if (detect_n(buff))
 			break ;
 	}
-	m_free(buff);
 	return (eter_line(&line));
 }

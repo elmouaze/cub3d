@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 #include "include/cub3d.h"
-#include "cube3d.h"
 #include "cub3d.h"
-#include <stdlib.h>
 
 uint32_t 	get_rgba(uint32_t rgb)
 {
@@ -95,7 +93,6 @@ void	import_sprites(t_cub *cub)
 	while (i < FRAMES)
 	{
 		char *png_path = ft_strjoin(path, ft_strjoin(ft_itoa(i), ft_strndup(".png", 4)));
-		printf("PNG path : %s\n", png_path);
 		cub->anim[i] = mlx_load_png(png_path);
 		if (!cub->anim[i])
 			exit(1);
@@ -109,7 +106,7 @@ int main(int ac, char **av)
 	t_data   map;
 
    if (ac != 2)
-        ft_perror("Error");
+        ft_perror("Error: Bad args");
     check_file_type(av[1]);
     init_map(&map);
     parse_map(&map, av[1]);

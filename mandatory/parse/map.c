@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 static char	*ft_fill(char *str)
 {
@@ -39,11 +39,9 @@ static t_map    *new_node(char *line,size_t len)
 	res = alloc(1,sizeof(t_map));
     if(!res)
     {
-        free(line);
         alloc(0,0);
     }
     res->line = ft_fill(line);
-    free(line);
     res->size = len;
     res->next = NULL;
 	return (res);
@@ -81,13 +79,13 @@ int is_player(char c)
     if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
     if (c != '0' && c != '1' && c != ' ' && c != 'D')
-        return (ft_perror("Error"), 1);
+        return (ft_perror("Error: Forbidden symbols"), 1);
     return (0);
 }
 void player_handler(int x, int y , t_data *data)
 {
     if (data->x_player != -1)
-        ft_perror("Error");
+        ft_perror("Error: No player");
     data->x_player = y;
     data->y_player = x;
 }
@@ -110,16 +108,16 @@ void check_map(char **map,t_data *data)
 			}
             if ((map[i][j] == '0' || map[i][j] == 'D') && 
                 (j == 0 || map[i][j - 1] == ' '))// left
-                ft_perror("Error");
+                ft_perror("Error: Unclosed map");
             else if ((map[i][j] == '0' || map[i][j] == 'D') && 
                 (map[i][j + 1] == 0 || map[i][j + 1] == ' '))// right
-                 ft_perror("Error");
+                 ft_perror("Error: Unclosed map");
             else if ((map[i][j] == '0' || map[i][j] == 'D') && 
                 (i == 0 || map[i - 1][j] == ' '|| map[i - 1][j] == 0 )) //up
-                 ft_perror("Error");
+                 ft_perror("Error: Unclosed map");
             else if ((map[i][j] == '0' || map[i][j] == 'D') && 
                 (!map[i + 1] || map[i + 1][j] == ' ' || map[i + 1][j] == 0))//down
-                 ft_perror("Error");
+                 ft_perror("Error: Unclosed map");
             j++;
         }
         i++;
@@ -166,7 +164,6 @@ void fill_map(char *str, int fd,t_data *data)
     {
         if (!check_end(line))
         {
-            free(line);
             break;
         }
         len = ft_strlen(line);
@@ -179,10 +176,10 @@ void fill_map(char *str, int fd,t_data *data)
     {
         if (check_end(line))
         {
-            (1) && (free(line), close(fd));
+            (1) && (close(fd));
             ft_perror("Error");
         }
-        (1) && (free(line), line = NULL);
+        (1) && (line = NULL);
     }
     close(fd);
     build_map(map, height, width,data);

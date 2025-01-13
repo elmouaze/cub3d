@@ -12,7 +12,7 @@
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g3 -std=c17 -Imandatory/include/ # -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -std=c17 -Imandatory/include/ #-fsanitize=address
 
 SRCS = mandatory/main.c $(wildcard mandatory/game/*.c) $(wildcard mandatory/parse/*.c)\
 $(wildcard mandatory/utils/*.c) $(wildcard mandatory/parse/get_next_line/*.c)
@@ -29,7 +29,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS)  $(FRAMEWORK) -o $@ $(OBJS)
 	
-%.o: %.c cube3d.h
+%.o: %.c cub3d.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

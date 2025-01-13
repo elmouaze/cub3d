@@ -12,7 +12,7 @@
 
 #include "../include/cub3d.h"
 
-float	vertical_caster(t_cub *cub, float angle)
+float	vertical_caster(t_cub *cub, float angle, int *wall_hit)
 {
 	float	x_step;
 	float	y_step;
@@ -32,8 +32,11 @@ float	vertical_caster(t_cub *cub, float angle)
 	cub->ray.v_intery =  cub->pl.y + tan(angle) * (cub->ray.v_interx - cub->pl.x);
 	if ((y_step < 0 && cub->ray.up) || (y_step > 0 && cub->ray.down))
 		y_step *= -1;
-	while (!wall_inter(cub, cub->ray.v_interx  + pxl, cub->ray.v_intery))
+	while (1)
 	{
+		*wall_hit = wall_inter(cub, cub->ray.v_interx  + pxl, cub->ray.v_intery);
+		if (*wall_hit)
+			break;
 		cub->ray.v_interx += x_step;
 		cub->ray.v_intery += y_step;
 	}

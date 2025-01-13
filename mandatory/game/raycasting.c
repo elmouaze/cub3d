@@ -23,36 +23,36 @@ double		norm_angle(double angle)
 	return (angle);
 }
 
-bool wall_inter(t_cub *cub, double x, double y)
+int wall_inter(t_cub *cub, double x, double y)
 {
     if (x < 0 || y < 0)
-        return true;
+        return 1;
 
     long xm = (long)(floor(x) / SQR_SIZE);
     long ym = (long)(floor(y) / SQR_SIZE);
 
     if (xm < 0 || ym < 0 || xm >= cub->map.width || ym >= cub->map.height)
-        return true;
+        return 1;
     char cell = cub->map.map2d[ym][xm];
 
     if (cell == '1')
-        return true;
+        return 1;
 
     if (cell == 'D') {
-        long xp = (long)(cub->pl.x / SQR_SIZE);
-        long yp = (long)(cub->pl.y / SQR_SIZE);
+        // long xp = (long)(cub->pl.x / SQR_SIZE);
+        // long yp = (long)(cub->pl.y / SQR_SIZE);
 
-        if (labs(xm - xp) < DOOR_OPEN_DIST && labs(ym - yp) < DOOR_OPEN_DIST)
-            return false;
-        cub->is_door = true;
-        return true;
+        // if (labs(xm - xp) < DOOR_OPEN_DIST && labs(ym - yp) < DOOR_OPEN_DIST)
+        //     return false;
+        // cub->is_door = 1;
+        return 2;
     }
-    return false;
+    return 0;
 }
 
 mlx_texture_t	*get_texture(t_cub *cub)
 {
-	if (cub->is_door == true)
+	if (cub->is_door)
 		return (cub->door);
 	if (cub->ray.is_vertical)
 	{
@@ -107,10 +107,7 @@ void	render_walls(t_cub *cub, int x) // TODO add prefix PART 1 part n
 
 	int i = 0;
 	while (i < y)
-	{
         mlx_put_pixel(cub->img, x, i++, cub->ceilling_color);
-		i++;
-	}
     while (y < wall_bottom)
     {
         float normalized_y = (y - distance_from_top) / wall_height;
@@ -121,10 +118,7 @@ void	render_walls(t_cub *cub, int x) // TODO add prefix PART 1 part n
     }
 	i = wall_bottom;
 	while (i < S_H)
-	{
         mlx_put_pixel(cub->img, x, i++, cub->floor_color);
-		i++;
-	}
 }
 
 void	cast_all_rays(t_cub *cub)
@@ -132,6 +126,8 @@ void	cast_all_rays(t_cub *cub)
 	int i = 0;
 	float  h_inter;
 	float  v_inter;
+	int		v_wall_hit;
+	int		h_wall_hit;
 
 
 	cub->ray.ray_ngl =  (cub->pl.rot_angle - ( FOV / 2));
@@ -143,20 +139,22 @@ void	cast_all_rays(t_cub *cub)
 		cub->ray.down = !cub->ray.up;
 		cub->ray.left = cub->ray.ray_ngl > M_PI / 2 && cub->ray.ray_ngl < 3 * M_PI / 2;
 		cub->ray.right = !cub->ray.left;
-		h_inter = horizontal_caster(cub,  cub->ray.ray_ngl);
-		v_inter = vertical_caster(cub,  cub->ray.ray_ngl); 
+		h_inter = horizontal_caster(cub,  cub->ray.ray_ngl, &h_wall_hit);
+		v_inter = vertical_caster(cub,  cub->ray.ray_ngl, &v_wall_hit); 
 		
 		if (h_inter < v_inter)
 		{
   			 cub->ray.distance = h_inter;
 			 cub->ray.is_vertical = false;
+			if (h_wall_hit == 2)
+				cub->is_door = true;
 		}
 		else
 		{
-		   cub->ray.distance = v_inter;
-			cub->ray.is_vertical = true;
-			 cub->is_door = false;
-  
+			cub->ray.distance = v_inter;
+			cub->ray.is_vertical = true; 
+			if (v_wall_hit == 2)
+				cub->is_door = true;
 		}
 		
 		cub->ray.distance *= cos(norm_angle(cub->ray.ray_ngl - cub->pl.rot_angle));

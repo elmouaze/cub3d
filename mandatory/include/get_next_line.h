@@ -29,13 +29,11 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <errno.h> 
-# include "cube3d.h"
+# include "cub3d.h"
 
-// size_t	ft_strlen(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strndup(char *str, size_t len);
 bool	detect_n(char *buff);
-void	m_free(char *mem);
 char	*get_next_line(int fd);
 
 #endif
