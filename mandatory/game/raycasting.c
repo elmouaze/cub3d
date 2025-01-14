@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:56:26 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/14 01:32:23 by abennar          ###   ########.fr       */
+/*   Updated: 2025/01/14 01:53:45 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,11 @@ int wall_inter(t_cub *cub, double x, double y)
         return 1;
 
     if (cell == 'D') {
-        // long xp = (long)(cub->pl.x / TILE_SIZE);
-        // long yp = (long)(cub->pl.y / TILE_SIZE);
+        long xp = (long)(cub->pl.x / TILE_SIZE);
+        long yp = (long)(cub->pl.y / TILE_SIZE);
 
-        // if (labs(xm - xp) < DOOR_OPEN_DIST && labs(ym - yp) < DOOR_OPEN_DIST)
-        //     return false;
-        // cub->is_door = 1;
+        if (labs(xm - xp) < DOOR_OPEN_DIST && labs(ym - yp) < DOOR_OPEN_DIST)
+            return false;
         return 2;
     }
     return 0;

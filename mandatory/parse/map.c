@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 09:09:31 by ael-moua          #+#    #+#             */
-/*   Updated: 2025/01/14 01:35:35 by abennar          ###   ########.fr       */
+/*   Updated: 2025/01/14 01:49:21 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int is_player(char c)
 void player_handler(int x, int y , t_data *data)
 {
     if (data->x_player != -1)
-        ft_perror("Error: No player");
+        ft_perror("Error: Just one player is allowed");
     data->x_player = y;
     data->y_player = x;
 }
@@ -124,7 +124,7 @@ void check_map(char **map,t_data *data)
         i++;
     }
     if (data->x_player == -1)
-        ft_perror("Error");
+        ft_perror("Error: No player");
     data->map = map;
 }
 
