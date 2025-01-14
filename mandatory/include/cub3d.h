@@ -13,7 +13,7 @@
 
 #define S_W 1400
 #define S_H 800
-#define FRAMES 75
+#define FRAMES 20
 
 
 #define MINIMAPS 10
@@ -140,6 +140,8 @@ typedef struct s_data
     int floor_color;
 } t_data;
 
+void close_func(void *param);
+void	free_exit(int exit_stat, t_cub *cub);
 void	mouse_handler(mouse_key_t key, action_t action, modifier_key_t mods, void *param);
 void	cursor_handler(double xpos, double ypos, void *param);
 

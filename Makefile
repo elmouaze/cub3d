@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+         #
+#    By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/16 22:15:17 by ael-moua          #+#    #+#              #
-#    Updated: 2025/01/10 04:00:44 by ael-moua         ###   ########.fr        #
+#    Updated: 2025/01/14 04:06:22 by abennar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g3 -std=c17 -Imandatory/include/ #-fsanitize=undefined
+CFLAGS = -Wall -Wextra  -g3 -std=c17 -Imandatory/include/ #-fsanitize=address
 
 SRCS = mandatory/main.c $(wildcard mandatory/game/*.c) $(wildcard mandatory/parse/*.c)\
 $(wildcard mandatory/utils/*.c) $(wildcard mandatory/parse/get_next_line/*.c)
