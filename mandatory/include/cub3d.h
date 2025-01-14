@@ -17,7 +17,7 @@
 
 
 #define MINIMAPS 10
-#define SQR_SIZE 35
+#define TILE_SIZE 35
 #define PI M_PI
 #define PLAYER_SPEED 5
 #define ROT_SPEED (3 * (PI / 180))
@@ -134,6 +134,7 @@ typedef struct s_data
     char *NO;
     char *SO;
     char *EA;
+    char pl_cell;
 
     int ciel_rgb;
     int floor_color;

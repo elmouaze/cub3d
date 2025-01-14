@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:29:35 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/10 04:03:29 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/14 01:42:00 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,14 @@ uint32_t 	get_rgba(uint32_t rgb)
 void	trans_data(t_data *data, t_cub *cub)
 {
 	cub->pl.l_r = 0;
-	cub->pl.rot_angle = PI;
+	if (data->pl_cell == 'N')
+		cub->pl.rot_angle = 4.71238898038;
+	else if (data->pl_cell == 'S')
+		cub->pl.rot_angle = 1.57079632679;
+	else if (data->pl_cell == 'E')
+		cub->pl.rot_angle = 0;
+	else
+		cub->pl.rot_angle = M_PI;
 	cub->pl.size = 0;
 	cub->pl.u_d = 0;
 	cub->cur_frame = 0;
@@ -30,8 +37,8 @@ void	trans_data(t_data *data, t_cub *cub)
 	
 	 cub->map.height = data->map_hieght;
 	 cub->map.width = data->map_width;
-	 cub->pl.x = data->x_player * SQR_SIZE;
-	 cub->pl.y = data->y_player * SQR_SIZE; 
+	 cub->pl.x = data->x_player * TILE_SIZE;
+	 cub->pl.y = data->y_player * TILE_SIZE; 
 	 cub->map.map2d= data->map;
 	 cub->textures[0] = mlx_load_png(data->NO);
 	 cub->textures[1] = mlx_load_png(data->SO);
@@ -46,8 +53,6 @@ void	trans_data(t_data *data, t_cub *cub)
 
 	cub->ceilling_color = get_rgba(data->ciel_rgb);
 	cub->floor_color = get_rgba(data->floor_color);
-
-
 	cub->mouse = false;
 }
 
@@ -92,9 +97,9 @@ void	import_sprites(t_cub *cub)
 	i = 0;
 	while (i < FRAMES)
 	{
-		char *png_path = ft_strjoin(path, ft_strjoin(ft_itoa(i), ft_strndup(".png", 4)));
+		char *png_path = ft_strjoin(path, ft_strjoin(ft_itoa(i), ".png"));
 		cub->anim[i] = mlx_load_png(png_path);
-		if (!cub->anim[i])
+		if (!cub->anim[i]) // TODO close free , check and close windows 
 			exit(1);
 		i++;
 	}

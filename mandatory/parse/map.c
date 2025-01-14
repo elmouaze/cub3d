@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 09:09:31 by ael-moua          #+#    #+#             */
-/*   Updated: 2025/01/10 03:58:37 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/14 01:35:35 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void check_map(char **map,t_data *data)
             if (is_player(map[i][j]))
 			{
                 player_handler(i , j,data);
+                data->pl_cell = map[i][j];
 				map[i][j] = '0';
 			}
             if ((map[i][j] == '0' || map[i][j] == 'D') && 

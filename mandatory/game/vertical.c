@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertical.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 22:18:34 by abennar           #+#    #+#             */
-/*   Updated: 2024/11/20 11:01:43 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/13 23:56:49 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ float	vertical_caster(t_cub *cub, float angle, int *wall_hit)
 	int		pxl;
 
 	pxl = 0;
-	x_step = SQR_SIZE;
+	x_step = TILE_SIZE;
 	y_step = x_step * tan(angle);
-	cub->ray.v_interx = floor(cub->pl.x / SQR_SIZE) * SQR_SIZE;
+	cub->ray.v_interx = floor(cub->pl.x / TILE_SIZE) * TILE_SIZE;
 	if (cub->ray.right)
-		cub->ray.v_interx += SQR_SIZE;
+		cub->ray.v_interx += TILE_SIZE;
 	else
 	{
 		x_step *= -1;

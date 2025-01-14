@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 17:36:45 by abennar           #+#    #+#             */
-/*   Updated: 2024/11/20 14:09:34 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/14 01:36:40 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,12 @@ void draw_line(t_cub *cub, int x, int y, int end_x, int end_y)
 	}
 }
 
-
-// void draw_the_player(t_cub *cub, int y, int x)
-// {
-// 		double d;
-// 		d = sqrt(((x - cub->pl.x) ) * (x - (cub->pl.x ))
-// 		+ (y - (cub->pl.y )) * (y - (cub->pl.y )));
-// 		if (d  < 1)
-// 			mlx_put_pixel(cub->img, x , y, GREEN);
-// }
-
-void draw(t_cub *cub)
-{
-	cast_all_rays(cub);
-}
-
 void game_loop(void *param)
 {
 	t_cub *cub = (t_cub *)param;
 	mlx_delete_image(cub->mlx, cub->img);
 	cub->img = mlx_new_image(cub->mlx, S_W, S_H);
-	draw(cub);
+	cast_all_rays(cub);
 	animation(cub);
 	minimap(cub);
 	mlx_image_to_window(cub->mlx, cub->img, 0, 0);
@@ -133,8 +118,8 @@ void draw_2d_tile(t_cub *cub, int x, int y, int size, uint32_t color)
 
 void minimap(t_cub *cub)
 {
-    int plx = cub->pl.x / SQR_SIZE; 
-    int ply = cub->pl.y / SQR_SIZE;
+    int plx = cub->pl.x / TILE_SIZE; 
+    int ply = cub->pl.y / TILE_SIZE;
 
     int gridy = ply - MINI_TILE;
     int gridx;

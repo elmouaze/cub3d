@@ -12,7 +12,7 @@
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g3 -std=c17 -Imandatory/include/ #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -std=c17 -Imandatory/include/ #-fsanitize=undefined
 
 SRCS = mandatory/main.c $(wildcard mandatory/game/*.c) $(wildcard mandatory/parse/*.c)\
 $(wildcard mandatory/utils/*.c) $(wildcard mandatory/parse/get_next_line/*.c)
@@ -22,7 +22,7 @@ MLX_LIB = libs/libmlx42.a
 GLFW_LIB = libs/libglfw3.a
 FRAMEWORK =  $(MLX_LIB) $(GLFW_LIB) -O3 -g -ffast-math -Ofast -framework Cocoa -framework OpenGL -framework IOKit 
 
-NAME = cube3d
+NAME = cub3d
 
 all: $(NAME)
 

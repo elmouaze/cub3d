@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:56:26 by abennar           #+#    #+#             */
-/*   Updated: 2024/11/20 11:12:28 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/14 01:32:23 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int wall_inter(t_cub *cub, double x, double y)
     if (x < 0 || y < 0)
         return 1;
 
-    long xm = (long)(floor(x) / SQR_SIZE);
-    long ym = (long)(floor(y) / SQR_SIZE);
+    long xm = (long)(floor(x) / TILE_SIZE);
+    long ym = (long)(floor(y) / TILE_SIZE);
 
     if (xm < 0 || ym < 0 || xm >= cub->map.width || ym >= cub->map.height)
         return 1;
@@ -39,8 +39,8 @@ int wall_inter(t_cub *cub, double x, double y)
         return 1;
 
     if (cell == 'D') {
-        // long xp = (long)(cub->pl.x / SQR_SIZE);
-        // long yp = (long)(cub->pl.y / SQR_SIZE);
+        // long xp = (long)(cub->pl.x / TILE_SIZE);
+        // long yp = (long)(cub->pl.y / TILE_SIZE);
 
         // if (labs(xm - xp) < DOOR_OPEN_DIST && labs(ym - yp) < DOOR_OPEN_DIST)
         //     return false;
@@ -77,44 +77,39 @@ uint32_t    get_texture_color(mlx_texture_t	*tex, int x, int y)
     return (pixels[index + 3] << 24) | (pixels[index + 0] << 16) | (pixels[index + 1] << 8) | (pixels[index + 2]);
 }
 
-void	render_walls(t_cub *cub, int x) // TODO add prefix PART 1 part n
+void	render_walls(t_cub *cub, int x)
 {
 	mlx_texture_t	*texture;
 
 	texture = get_texture(cub);
-    float dist_p = (S_W / 2.0f) / tan(FOV / 2.0f);
-    float wall_height = (SQR_SIZE / cub->ray.distance) * dist_p;
+    int dist_p = (S_W / 2.0f) / tan(FOV / 2.0f);
+    int wall_height = (TILE_SIZE / cub->ray.distance) * dist_p;
     int wall_top = (S_H / 2) - ((int)wall_height / 2);
     int wall_bottom = (S_H / 2) + ((int)wall_height / 2);
 
-	if (wall_top < 0)
-		wall_top = 0;
-	if (wall_bottom >= S_H)
-		wall_bottom = S_H;
+	wall_top = (int)fmax(wall_top, 0);
+	wall_bottom = (int)fmin(wall_bottom, S_H);
+
     float hit_x;
     if (cub->ray.is_vertical)
-        hit_x = cub->ray.v_intery - floor(cub->ray.v_intery / SQR_SIZE) * SQR_SIZE;
+        hit_x = cub->ray.v_intery - floor(cub->ray.v_intery / TILE_SIZE) * TILE_SIZE;
     else
-        hit_x = cub->ray.h_interx - floor(cub->ray.h_interx / SQR_SIZE) * SQR_SIZE;
-    float tex_x = (hit_x / SQR_SIZE) * texture->width;
-    if (cub->ray.is_vertical && cub->ray.left)
-        tex_x = texture->width - tex_x - 1;
-    if (!cub->ray.is_vertical && cub->ray.up)
-        tex_x = texture->width - tex_x - 1;
-    tex_x = fmax(0, fmin(tex_x, texture->width - 1));
-    int y = wall_top;
+        hit_x = cub->ray.h_interx - floor(cub->ray.h_interx / TILE_SIZE) * TILE_SIZE;
+
+    float x_offset = (hit_x / TILE_SIZE) * texture->width;
+    x_offset = fmax(0, x_offset);
 	float distance_from_top = ((S_H / 2) - ((int)wall_height / 2));
 
 	int i = 0;
-	while (i < y)
+	while (i < wall_top)
         mlx_put_pixel(cub->img, x, i++, cub->ceilling_color);
-    while (y < wall_bottom)
+    while (wall_top < wall_bottom)
     {
-        float normalized_y = (y - distance_from_top) / wall_height;
-        float tex_y = normalized_y * texture->height;
-        tex_y = fmax(0, fmin(tex_y, texture->height - 1));
-        unsigned int color = get_texture_color(texture, (int)tex_x, (int)tex_y);
-        mlx_put_pixel(cub->img, x, y++, color);
+        float normalized_y = (wall_top - distance_from_top) / wall_height;
+        float y_offset = normalized_y * texture->height;
+        y_offset = fmax(0, y_offset);
+        unsigned int color = get_texture_color(texture, (int)x_offset, (int)y_offset);
+        mlx_put_pixel(cub->img, x, wall_top++, color);
     }
 	i = wall_bottom;
 	while (i < S_H)
@@ -126,8 +121,8 @@ void	cast_all_rays(t_cub *cub)
 	int i = 0;
 	float  h_inter;
 	float  v_inter;
-	int		v_wall_hit;
-	int		h_wall_hit;
+	int		v_door_hit;
+	int		h_door_hit;
 
 
 	cub->ray.ray_ngl =  (cub->pl.rot_angle - ( FOV / 2));
@@ -139,24 +134,21 @@ void	cast_all_rays(t_cub *cub)
 		cub->ray.down = !cub->ray.up;
 		cub->ray.left = cub->ray.ray_ngl > M_PI / 2 && cub->ray.ray_ngl < 3 * M_PI / 2;
 		cub->ray.right = !cub->ray.left;
-		h_inter = horizontal_caster(cub,  cub->ray.ray_ngl, &h_wall_hit);
-		v_inter = vertical_caster(cub,  cub->ray.ray_ngl, &v_wall_hit); 
+		h_inter = horizontal_caster(cub,  cub->ray.ray_ngl, &h_door_hit);
+		v_inter = vertical_caster(cub,  cub->ray.ray_ngl, &v_door_hit); 
 		
 		if (h_inter < v_inter)
 		{
   			 cub->ray.distance = h_inter;
 			 cub->ray.is_vertical = false;
-			if (h_wall_hit == 2)
-				cub->is_door = true;
+			cub->is_door = h_door_hit == 2;
 		}
 		else
 		{
 			cub->ray.distance = v_inter;
 			cub->ray.is_vertical = true; 
-			if (v_wall_hit == 2)
-				cub->is_door = true;
+			cub->is_door = v_door_hit == 2;
 		}
-		
 		cub->ray.distance *= cos(norm_angle(cub->ray.ray_ngl - cub->pl.rot_angle));
 		if (cub->ray.distance < 0.1f)
 			cub->ray.distance = 0.1f;
