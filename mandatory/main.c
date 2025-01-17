@@ -6,7 +6,7 @@
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:29:35 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/10 04:03:29 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/17 02:09:14 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	trans_data(t_data *data, t_cub *cub)
 	cub->cur_frame = 0;
 	cub->pl_action = 0;
 	cub->is_door = false;
-	
 	 cub->map.height = data->map_hieght;
 	 cub->map.width = data->map_width;
 	 cub->pl.x = data->x_player * SQR_SIZE;
