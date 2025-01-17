@@ -12,22 +12,6 @@
 
 #include "get_next_line.h"
 
-void	m_free(char *mem)
-{
-	(void) mem;
-	// if (mem)
-		// free (mem);
-}
-
-// size_t	ft_strlen(char *s)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	while (s && s[i])
-// 		i++;
-// 	return (i);
-// }
 
 char	*ft_strndup(char *str, size_t n)
 {
@@ -37,7 +21,7 @@ char	*ft_strndup(char *str, size_t n)
 	if (!str || n == 0)
 		return (NULL);
 	i = 0;
-	r_str = (char *)malloc((n + 1) * sizeof(char));
+	r_str = (char *)alloc(1, (n + 1) * sizeof(char));
 	if (!r_str)
 		return (NULL);
 	while (i < n && str[i])
@@ -64,9 +48,9 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	}
 	i = 0;
-	r_line = (char *)malloc(sizeof(char) * (ft_strlen(s2) + ft_strlen(s1) + 1));
+	r_line = (char *)alloc(1, sizeof(char) * (ft_strlen(s2) + ft_strlen(s1) + 1));
 	if (!r_line)
-		return (m_free(s1), s1 = NULL, NULL);
+		return (s1 = NULL, NULL);
 	j = 0;
 	while (s1[i])
 		r_line[j++] = s1[i++];
@@ -74,7 +58,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[i])
 		r_line[j++] = s2[i++];
 	r_line[j] = '\0';
-	return (m_free(s1), s1 = NULL, r_line);
+	return (s1 = NULL, r_line);
 }
 
 bool	detect_n(char *buff)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:58:36 by abennar           #+#    #+#             */
-/*   Updated: 2024/11/20 11:01:34 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/13 23:56:49 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 bool is_wall(t_cub *cub, int x, int y)
 {
-    int prev_grid_x = (int)floor(cub->pl.x / SQR_SIZE);
-    int prev_grid_y = (int)floor(cub->pl.y / SQR_SIZE);
+    int prev_grid_x = (int)floor(cub->pl.x / TILE_SIZE);
+    int prev_grid_y = (int)floor(cub->pl.y / TILE_SIZE);
 
-    int grid_x = (int)floor(x / SQR_SIZE);
-    int grid_y = (int)floor(y / SQR_SIZE);
+    int grid_x = (int)floor(x / TILE_SIZE);
+    int grid_y = (int)floor(y / TILE_SIZE);
 
     if (cub->map.map2d[grid_y][grid_x] == '1')
         return true;

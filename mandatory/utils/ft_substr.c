@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char			*p;
@@ -23,7 +23,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = size - start;
 	if (start > size)
 		len = 0;
-	p = (char *) malloc(sizeof(char) * (len + 1));
+	p = (char *) alloc(1, sizeof(char) * (len + 1));
 	if (!p)
 		return (NULL);
 	if (size >= start)

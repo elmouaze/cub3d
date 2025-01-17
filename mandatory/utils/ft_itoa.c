@@ -1,6 +1,6 @@
 
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 
 static size_t	count_digits(long n)
@@ -29,7 +29,7 @@ char	*ft_itoa(int n)
 		digits++;
 		nb *= -1;
 	}
-	ascii = malloc(sizeof(char) * digits + 1);
+	ascii = alloc(1, sizeof(char) * digits + 1);
 	if (!ascii)
 		return (NULL);
 	*(ascii + (digits--)) = '\0';

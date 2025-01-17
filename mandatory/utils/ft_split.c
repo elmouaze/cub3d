@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 static int	ft_count_words(char const *s, char c)
 {
@@ -35,7 +35,7 @@ static int	ft_count_words(char const *s, char c)
 	return (counter);
 }
 
-void	ft_free_memory(char **res)
+void	ft_free_memory(char **res) // TODO remove this 
 {
 	int	i;
 
@@ -61,7 +61,7 @@ static char	*ft_count_char(char const *s, char c)
 	index = 0;
 	while (s[counter] != c && s[counter])
 		counter++;
-	str = (char *)malloc(sizeof(char) * (counter + 1));
+	str = (char *)alloc(1, sizeof(char) * (counter + 1));
 	if (!str)
 		return (NULL);
 	while (counter)
@@ -83,7 +83,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	count_w = ft_count_words(s, c);
-	res = (char **)malloc(sizeof(char *) * (count_w + 1));
+	res = (char **)alloc(1, sizeof(char *) * (count_w + 1));
 	if (!res)
 		return (NULL);
 	i = -1;
@@ -94,7 +94,6 @@ char	**ft_split(char const *s, char c)
 		res[i] = ft_count_char(s, c);
 		if (!res[i])
 		{
-			ft_free_memory(res);
 			return (NULL);
 		}
 		s += ft_strlen(res[i]);

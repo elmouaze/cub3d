@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 03:20:21 by abennar           #+#    #+#             */
-/*   Updated: 2024/11/20 11:07:17 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/14 02:38:53 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ uint	rgb2rgba(mlx_texture_t *texture, int x, int y)
 
 void	render_a_frame(t_cub *cub, mlx_texture_t *cur_frame)
 {
-	int h = 0;
-    int w = 0;
+	uint32_t h = 0;
+    uint32_t w = 0;
     uint    color;
 
-	while ((uint32_t) h < cur_frame->height)
+	while (h < cur_frame->height)
     {
         w = 0;
-        while ((uint32_t) w < cur_frame->width)
+        while (w < cur_frame->width)
         {
             color = rgb2rgba(cur_frame, w, h);
                 if (color && color != 0xFFFFFF00)
@@ -64,6 +64,9 @@ void    animation(t_cub *cub)
 		render_a_frame(cub, cub->anim[cub->cur_frame]);
 		cub->cur_frame++;
 		if (cub->cur_frame == FRAMES)
+		{
 			cub->pl_action = false;
+			cub->cur_frame = 0;
+		}
 	}
 }

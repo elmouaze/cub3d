@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 static int	check_the_set(char c, const char *set)
 {
@@ -43,7 +43,7 @@ char	*ft_strtrim(const char *s1, const char *set)
 	end = ft_strlen(s1);
 	while (end > start && check_the_set(s1[end - 1], set))
 		end--;
-	str = (char *)malloc(sizeof(char) * (end - start + 1));
+	str = (char *)alloc(1, sizeof(char) * (end - start + 1));
 	if (!str)
 		return (NULL);
 	while (start < end)

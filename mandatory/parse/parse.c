@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 void check_file_type(char *str)
 {
@@ -21,16 +21,6 @@ void check_file_type(char *str)
         ft_perror("Error");
 }
 
-// int check_texture(char *file)
-// {
-//     int size;
-
-//     size = ft_strlen(file);
-//     if (size < 4 || ft_strncmp(file + (size - 4),".xpm",4) != 0)
-//         return (0);
-//     return (1);
-// }
-
 int convert_rgb(char *color)
 {
     char **colors;
@@ -38,15 +28,14 @@ int convert_rgb(char *color)
     int green;
     int blue;
 
-    colors = ft_split(color,',');
+    colors = ft_split(color, ',');
     if (!colors || !colors[0] || !colors[1] || !colors[2] || colors[3])
-        return (ft_free_memory(colors), -1);
+        return (-1);
     red = ft_atoi(colors[0]);
     green =  ft_atoi(colors[1]);
     blue =  ft_atoi(colors[2]);
     if (red < 0 || green < 0 || blue < 0)
-        return (ft_free_memory(colors), -1);
-    ft_free_memory(colors);
+        return (-1);
     return ((red << 16) | (green << 8) | blue);
  }
 
@@ -99,11 +88,10 @@ void parse_map(t_data *map, char *file)
             else 
                 break;
         }
-        free(line);
         line = NULL;
     }
     if (cpt != 6 || map->ciel_rgb < 0 || map->floor_color < 0 || wall_check(line))
-        return(close(fd), free(line), ft_perror("Error")); 
+        return(close(fd), ft_perror("Error")); 
     fill_map(line, fd,map);
 }
 
