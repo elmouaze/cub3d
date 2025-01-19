@@ -3,7 +3,6 @@
 
 #include <libc.h>
 #include "MLX42.h"
-#include "errno.h"
 #include "get_next_line.h"
 #include <math.h>
 
@@ -36,7 +35,6 @@
 #define LIGHT_GRAY 0xC0C0C0FF
 #define DARK_GRAY 0x404040FF
 
-#define COLOR
 
 typedef struct s_ray
 {
@@ -56,13 +54,17 @@ typedef struct s_ray
 } ray_t;
 
 
-typedef struct s_img_data
+struct wall_data
 {
-    void *img;
-    char *data_ptr;
-    int bit_per_pixle;
-    int line_size;
-} t_img_data;
+    mlx_texture_t	*texture;
+	int				dist_p;
+	int				wall_height;
+	int				wall_top;
+	int				wall_bottom;
+    float           distance_from_top;
+    float           x_offset;
+};
+
 
 typedef struct player
 {
@@ -75,13 +77,6 @@ typedef struct player
 
     int size;
 } player;
-
-typedef struct s_textures
-{
-    void *player;
-    void *wall;
-    void *space;
-} t_textures;
 
 typedef struct map
 {
@@ -108,6 +103,9 @@ typedef struct cub
     int floor_color;
     ray_t ray;
     mlx_key_data_t key;
+    float x_step;
+    float y_step;
+    int pxl;
 } t_cub;
 
 typedef struct s_map
@@ -140,43 +138,54 @@ typedef struct s_data
     int floor_color;
 } t_data;
 
-void close_func(void *param);
-void	free_exit(int exit_stat, t_cub *cub);
+
+// uint32_t         get_rgba(uint32_t rgb);
+
+
+// bonus 
+void    minimap(t_cub *cub);
+void    animation(t_cub *cub);
 void	mouse_handler(mouse_key_t key, action_t action, modifier_key_t mods, void *param);
 void	cursor_handler(double xpos, double ypos, void *param);
 
-void	minimap(t_cub *cub);
-void	animation(t_cub *cub);
-float            horizontal_caster(t_cub *cub, float angle, int *wall_hit);
-float            vertical_caster(t_cub *cub, float angle, int *);
-int	 wall_inter(t_cub *cub, double x, double y);
 
+// game 
+
+void			start_the_game(t_cub *cub);
+void	        cast_all_rays(t_cub *cub);
+void			update(t_cub *cub);
+int				wall_inter(t_cub *cub, double x, double y);
+mlx_texture_t   *get_texture(t_cub *cub);
 double           norm_angle(double angle);
-bool	is_wall(t_cub *cub, int x, int y);
-void	game_loop(void *param);
-void	start_the_game(t_cub *cub);
-void	update(t_cub *cub);
-void	draw_line(t_cub *cub, int x, int y, int end_x, int end_y);
-void	cast_all_rays(t_cub *cub);
+float           horizontal_caster(t_cub *cub, float angle, int *wall_hit);
+float           vertical_caster(t_cub *cub, float angle, int *);
+void			render_walls(t_cub *cub, int x);
+void			wall_env(t_cub *cub, struct wall_data *data);
 
-void	print_error(char *str, int exit_flag);
-char	**get_the_map(char *map_file);
-uint32_t         get_rgba(uint32_t rgb);
-int	 ft_strncmp(const char *s1, const char *s2, size_t n);
-size_t           ft_strlen(const char *s);
-void	ft_perror(char *str);
-char	*ft_strtrim(const char *s1, const char *set);
+
+
+// parsing 
+
+void    check_file_type(char *str);
+void    init_map(t_data *map);
+void    parse_map(t_data *map, char *file);
+
+
+// utils
+
+char    		*ft_itoa(int n);
+void    		*alloc(int mode, int size);
+void    		ft_perror(char *str);
+void    		free_exit(int exit_stat, t_cub *cub);
+void    		close_func(void *param);
+size_t			ft_strlen(const char *s);
+void			*ft_calloc(size_t count, size_t size);
 size_t           ft_strlcpy(char *dst, const char *src, size_t dstsize);
-char	**ft_split(char const *s, char c);
-void	ft_free_memory(char **res);
-int	 ft_atoi(const char *str);
-void	fill_map(char *str, int fd, t_data *map);
-int          	ft_strchr(const char *s);
-void	*ft_calloc(size_t count, size_t size);
-void	*alloc(int mode, int size);
-void	check_file_type(char *str);
-void	parse_map(t_data *map, char *file);
-void	init_map(t_data *map);
-char	*ft_itoa(int n);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+char			**ft_split(char const *s, char c);
+int				ft_atoi(const char *str);
+char			*ft_strtrim(const char *s1, const char *set);
+void			fill_map(char *str, int fd, t_data *map);
+
 
 #endif           /* CUB3D_H */

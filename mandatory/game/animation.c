@@ -6,21 +6,19 @@
 /*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 03:20:21 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/14 02:38:53 by abennar          ###   ########.fr       */
+/*   Updated: 2025/01/17 13:48:57 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-// TODO: handiling error dunring loading  png's
-
 uint	rgb2rgba(mlx_texture_t *texture, int x, int y)
 {
-	int		pixel_index;
+	int			pixel_index;
 	uint32_t	alpha;
-	uint8_t	red;
-	uint8_t	green;
-	uint8_t	blue;
+	uint8_t		red;
+	uint8_t		green;
+	uint8_t		blue;
 
 	pixel_index = (y * texture->width + x) * 4;
 	alpha = texture->pixels[pixel_index + 0];
@@ -32,34 +30,35 @@ uint	rgb2rgba(mlx_texture_t *texture, int x, int y)
 
 void	render_a_frame(t_cub *cub, mlx_texture_t *cur_frame)
 {
-	uint32_t h = 0;
-    uint32_t w = 0;
-    uint    color;
+	uint32_t	h;
+	uint32_t	w;
+	uint		color;
 
+	h = 0;
+	w = 0;
 	while (h < cur_frame->height)
-    {
-        w = 0;
-        while (w < cur_frame->width)
-        {
-            color = rgb2rgba(cur_frame, w, h);
-                if (color && color != 0xFFFFFF00)
-            mlx_put_pixel(cub->img, (S_W - cur_frame->width) / 2 + w, S_H
-					- cur_frame->height + h, color);
-            w++;
-        }
-        h++;
-    }
+	{
+		w = 0;
+		while (w < cur_frame->width)
+		{
+			color = rgb2rgba(cur_frame, w, h);
+			if (color && color != 0xFFFFFF00)
+				mlx_put_pixel(cub->img, (S_W - cur_frame->width) / 2 + w, \
+					S_H - cur_frame->height + h, color);
+			w++;
+		}
+		h++;
+	}
 }
 
-void    animation(t_cub *cub)
+void	animation(t_cub *cub)
 {
-	
 	if (!cub->pl_action)
 	{
 		render_a_frame(cub, cub->anim[0]);
 		cub->cur_frame = 0;
 	}
-	else 
+	else
 	{
 		render_a_frame(cub, cub->anim[cub->cur_frame]);
 		cub->cur_frame++;

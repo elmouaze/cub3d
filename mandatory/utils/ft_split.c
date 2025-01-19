@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 05:07:24 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/20 04:18:50 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/19 10:09:43 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,6 @@ static int	ft_count_words(char const *s, char c)
 	if (counter == 0)
 		return (1);
 	return (counter);
-}
-
-void	ft_free_memory(char **res) // TODO remove this 
-{
-	int	i;
-
-	i = 0;
-	if (!res)
-		return;
-	while (res[i])
-	{
-		free(res[i]);
-		i++;
-	}
-	free(res);
-	res = NULL;
 }
 
 static char	*ft_count_char(char const *s, char c)

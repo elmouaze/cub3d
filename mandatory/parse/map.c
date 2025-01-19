@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 09:09:31 by ael-moua          #+#    #+#             */
-/*   Updated: 2025/01/17 12:01:48 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/17 13:25:09 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,7 @@ void map_error(char **map , int i , int j)
         if (map[i][j - 1] == 'D' || map[i][j + 1] == 'D'
         || map[i + 1][j] == 'D' || map[i - 1][j] == 'D')
             ft_perror("Error: Multiple Doors near each other ");
-         if (((map[i][j - 1] == '1') + (map[i][j + 1] == '1')
-          + (map[i + 1][j] == '1') + (map[i - 1][j] == '1')) < 2)
+         if (((map[i][j - 1] == '1') + (map[i][j + 1] == '1') != 2)  && ((map[i + 1][j] == '1') + (map[i - 1][j] == '1') != 2))
             ft_perror("Error: A door without a wall");
     }
 }

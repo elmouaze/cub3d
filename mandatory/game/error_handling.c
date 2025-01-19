@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 08:10:02 by abennar           #+#    #+#             */
-/*   Updated: 2024/11/20 12:27:13 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/19 10:10:22 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
 #include "cub3d.h"
 
 void	ft_putstr_fd(char *s, int fd)
@@ -23,20 +22,4 @@ void	ft_putstr_fd(char *s, int fd)
 		write (fd, &s[index], 1);
 		index++;
 	}
-}
-void print_error(char *str,int exit_flag)
-{
-    ft_putstr_fd(str,2);
-    if(exit_flag)
-        exit(errno);
-}
-
-void    error(char *where, char *unexpactd, char *reason)
-{
-    if (where)
-        write(2, where, ft_strlen(where));
-    if (unexpactd)
-        write(2, unexpactd, ft_strlen(unexpactd));
-    if (reason)
-        write(2, reason, ft_strlen(reason));
 }

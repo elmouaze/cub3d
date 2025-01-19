@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:51:27 by abennar           #+#    #+#             */
-/*   Updated: 2024/11/20 11:12:14 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/17 15:06:11 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	mouse_handler(mouse_key_t key, action_t action, modifier_key_t mods, void *param)
+void	mouse_handler(mouse_key_t key, action_t action, \
+modifier_key_t mods, void *param)
 {
-	t_cub *cub;
-	
-	cub = (t_cub*)param;
-	(void)mods;
+	t_cub	*cub;
+
+	cub = (t_cub *) param;
+	(void) mods;
 	if (key == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
 		cub->mouse = true;
 	if (key == MLX_MOUSE_BUTTON_LEFT && action == MLX_RELEASE)
@@ -26,14 +27,13 @@ void	mouse_handler(mouse_key_t key, action_t action, modifier_key_t mods, void *
 
 void	cursor_handler(double xpos, double ypos, void *param)
 {
-	t_cub *cub;
+	t_cub	*cub;
 
-	cub = (t_cub*) param;
-
+	cub = (t_cub *) param;
 	if (cub->mouse)
 	{
-		(void)ypos;
-		cub = (t_cub*)param;
+		(void) ypos;
+		cub = (t_cub *)param;
 		if (xpos > S_W / 2)
 			cub->pl.rot = -1;
 		else
@@ -41,6 +41,6 @@ void	cursor_handler(double xpos, double ypos, void *param)
 	}
 	else
 	{
-			cub->pl.rot = 0;
+		cub->pl.rot = 0;
 	}
 }
