@@ -6,13 +6,13 @@
 /*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 22:18:20 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/17 15:03:11 by abennar          ###   ########.fr       */
+/*   Updated: 2025/01/19 10:36:31 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	go2_wall(t_cub *cub, int *wall_hit)
+static void	go2_wall(t_cub *cub, int *wall_hit)
 {
 	while (1)
 	{
