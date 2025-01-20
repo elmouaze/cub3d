@@ -6,7 +6,7 @@
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 22:36:05 by ael-moua          #+#    #+#             */
-/*   Updated: 2025/01/20 22:47:36 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/20 22:50:14 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ typedef struct map
 	char	**map2d;
 	int		width;
 	int		height;
-}	t_map;
+}	t_mapp;
 
 typedef struct cub
 {
 	mlx_t			*mlx;
 	player			pl;
-	t_map			map;
+	t_mapp			map;
 	int				cur_frame;
 	mlx_texture_t	*anim[FRAMES];
 	mlx_texture_t	*textures[4];
