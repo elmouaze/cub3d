@@ -6,7 +6,7 @@
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:29:35 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/17 02:22:44 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/20 22:31:38 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,27 @@ void	*ft_memset(void *b, int c, size_t len)
 void	free_exit(int exit_stat, t_cub *cub)
 {
 	int i = -1;
-    while (++i < 4)
+	while (++i < 4)
 	{
-        if (cub->textures[i])
-            mlx_delete_texture(cub->textures[i]);
-    }
-    i = -1;
-    while (++i < FRAMES)
-	{
-        if (cub->anim[i])
-            mlx_delete_texture(cub->anim[i]);
+		if (cub->textures[i])
+			mlx_delete_texture(cub->textures[i]);
 	}
-    if (cub->door)
-        mlx_delete_texture(cub->door);
-    if (cub->img)
-        mlx_delete_image(cub->mlx, cub->img);
+	i = -1;
+	while (++i < FRAMES)
+	{
+		if (cub->anim[i])
+			mlx_delete_texture(cub->anim[i]);
+	}
+	if (cub->door)
+		mlx_delete_texture(cub->door);
+	if (cub->img)
+		mlx_delete_image(cub->mlx, cub->img);
 	if (cub->mlx)
 		mlx_terminate(cub->mlx);
 
-    alloc(0, 0);
+	alloc(0, 0);
 	ft_memset(cub, 0, sizeof(t_cub));
-    exit(exit_stat);
+	exit(exit_stat);
 }
 
 uint32_t 	get_rgba(uint32_t rgb)
@@ -82,41 +82,41 @@ void	trans_data(t_data *data, t_cub *cub)
 	if (!cub->textures[0] || !cub->textures[1] || !cub->textures[2] || !cub->textures[3])
 		free_exit(1, cub);
 	cub->ceilling_color = get_rgba(data->ciel_rgb);
-	cub->floor_color = get_rgba(data->floor_color);
+	cub->floor_rgb = get_rgba(data->floor_rgb);
 	cub->mouse = false;
 }
 
 void print_data(t_data *data)
 {
-    if (data == NULL)
-    {
-        printf("Data is NULL\n");
-        return;
-    }
+	if (data == NULL)
+	{
+		printf("Data is NULL\n");
+		return;
+	}
 
-    printf("Player Position: (%d, %d)\n", data->x_player, data->y_player);
-    
-    printf("West Texture: %s\n", data->WE ? data->WE : "NULL");
-    printf("North Texture: %s\n", data->NO ? data->NO : "NULL");
-    printf("South Texture: %s\n", data->SO ? data->SO : "NULL");
-    printf("East Texture: %s\n", data->EA ? data->EA : "NULL");
+	printf("Player Position: (%d, %d)\n", data->x_player, data->y_player);
+	
+	printf("West Texture: %s\n", data->WE ? data->WE : "NULL");
+	printf("North Texture: %s\n", data->NO ? data->NO : "NULL");
+	printf("South Texture: %s\n", data->SO ? data->SO : "NULL");
+	printf("East Texture: %s\n", data->EA ? data->EA : "NULL");
 
-    printf("Ciel RGB: %d\n", data->ciel_rgb);
-    printf("Floor Color: %d\n", data->floor_color);
+	printf("Ciel RGB: %d\n", data->ciel_rgb);
+	printf("Floor Color: %d\n", data->floor_rgb);
 
-    if (data->map != NULL)
-    {
-        printf("Map:\n");
-        for (int i = 0; i < data->map_hieght; ++i)
-        {
-            if (data->map[i] != NULL)
-                printf("%s\n", data->map[i]);
-        }
-    }
-    else
-    {
-        printf("No map data available.\n");
-    }
+	if (data->map != NULL)
+	{
+		printf("Map:\n");
+		for (int i = 0; i < data->map_hieght; ++i)
+		{
+			if (data->map[i] != NULL)
+				printf("%s\n", data->map[i]);
+		}
+	}
+	else
+	{
+		printf("No map data available.\n");
+	}
 }
 
 void	import_sprites(t_cub *cub)
@@ -158,10 +158,10 @@ int main(int ac, char **av)
 	// atexit(check_leaks);
 
    if (ac != 2)
-        ft_perror("Error: Bad args");
-    check_file_type(av[1]);
-    init_map(&map);
-    parse_map(&map, av[1]);
+		ft_perror("Error: Bad args");
+	check_file_type(av[1]);
+	init_map(&map);
+	parse_map(&map, av[1]);
 	trans_data(&map, &cub);
 
 	import_sprites(&cub);

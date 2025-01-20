@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 09:52:01 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/19 10:31:29 by abennar          ###   ########.fr       */
+/*   Updated: 2025/01/20 22:40:02 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static uint32_t	get_texture_color(mlx_texture_t	*tex, int x, int y)
 
 void	render_walls(t_cub *cub, int x)
 {
-	struct wall_data	data;
+	struct t_wall_data	data;
 	int					i;
 	float				y_offset;
 	float				y;
@@ -74,5 +74,5 @@ void	render_walls(t_cub *cub, int x)
 	}
 	i = data.wall_bottom;
 	while (i < S_H)
-		mlx_put_pixel(cub->img, x, i++, cub->floor_color);
+		mlx_put_pixel(cub->img, x, i++, cub->floor_rgb);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory.c                                           :+:      :+:    :+:   */
+/*   memory_and_errors.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 04:23:16 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/20 04:43:56 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/20 22:31:38 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,25 @@ void	*alloc(int mode, int size)
 		return (res);
 	}
 	return (free_all(&head), NULL);
+}
+
+void	ft_perror(char *str)
+{
+	printf("%s\n", str);
+	alloc(0, 0);
+	exit(1);
+}
+
+void	init_map(t_data *map)
+{
+	map->map_hieght = -1;
+	map->map_width = -1;
+	map->x_player = -1;
+	map->y_player = -1;
+	map->ciel_rgb = -1;
+	map->floor_rgb = -1;
+	map->EA = NULL;
+	map->NO = NULL;
+	map->SO = NULL;
+	map->WE = NULL;
 }

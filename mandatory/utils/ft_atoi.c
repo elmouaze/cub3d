@@ -6,7 +6,7 @@
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 05:13:20 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/17 08:30:27 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/20 22:32:39 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ int	ft_atoi(const char *str)
 		str++;
 	if (*str != '\0')
 		return (-1);
-	return ((int)res );
+	return ((int)res);
 }

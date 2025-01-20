@@ -6,11 +6,12 @@
 /*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 03:43:19 by ael-moua          #+#    #+#             */
-/*   Updated: 2024/11/17 03:43:36 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/20 22:34:15 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char			*p;

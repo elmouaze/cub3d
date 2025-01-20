@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:39:20 by abennar           #+#    #+#             */
-/*   Updated: 2023/12/17 19:27:49 by abennar          ###   ########.fr       */
+/*   Updated: 2025/01/20 19:14:13 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
 
 char	*ft_strndup(char *str, size_t n)
 {
@@ -48,7 +47,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	}
 	i = 0;
-	r_line = (char *)alloc(1, sizeof(char) * (ft_strlen(s2) + ft_strlen(s1) + 1));
+	r_line = (char *)alloc(1, (ft_strlen(s2) + ft_strlen(s1) + 1));
 	if (!r_line)
 		return (s1 = NULL, NULL);
 	j = 0;
