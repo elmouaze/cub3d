@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 22:12:40 by ael-moua          #+#    #+#             */
-/*   Updated: 2025/01/20 22:24:06 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/24 09:35:20 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ char	*ft_fill(char *str)
 	return (res);
 }
 
-t_map	*new_node(char *line, size_t len)
+t_parse_map	*new_node(char *line, size_t len)
 {
-	t_map	*res;
+	t_parse_map	*res;
 
-	res = alloc(1, sizeof(t_map));
+	res = alloc(1, sizeof(t_parse_map));
 	if (!res)
 		alloc(0, 0);
 	res->line = ft_fill(line);
@@ -45,9 +45,9 @@ t_map	*new_node(char *line, size_t len)
 	return (res);
 }
 
-void	add_token(t_map **lst, t_map *new)
+void	add_token(t_parse_map **lst, t_parse_map *new)
 {
-	t_map	*node;
+	t_parse_map	*node;
 
 	if (!*lst)
 		*lst = new;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 21:28:55 by ael-moua          #+#    #+#             */
-/*   Updated: 2025/01/20 22:31:38 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/24 09:31:01 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int	convert_rgb(char *color)
 
 int	check_line(char *tmp, t_data *map)
 {
-	if (ft_strncmp(tmp, "WE ", 2) == 0 && !map->WE)
-		return (map->WE = ft_strtrim(tmp + 3, " \t"), 1);
-	else if (ft_strncmp(tmp, "NO ", 2) == 0 && !map->NO)
-		return (map->NO = ft_strtrim(tmp + 3, " \t"), 1);
-	else if (ft_strncmp(tmp, "SO ", 2) == 0 && !map->SO)
-		return (map->SO = ft_strtrim(tmp + 3, " \t"), 1);
-	else if (ft_strncmp(tmp, "EA ", 2) == 0 && !map->EA)
-		return (map->EA = ft_strtrim(tmp + 3, " \t"), 1);
+	if (ft_strncmp(tmp, "WE ", 2) == 0 && !map->we)
+		return (map->we = ft_strtrim(tmp + 3, " \t"), 1);
+	else if (ft_strncmp(tmp, "NO ", 2) == 0 && !map->we)
+		return (map->no = ft_strtrim(tmp + 3, " \t"), 1);
+	else if (ft_strncmp(tmp, "SO ", 2) == 0 && !map->so)
+		return (map->so = ft_strtrim(tmp + 3, " \t"), 1);
+	else if (ft_strncmp(tmp, "EA ", 2) == 0 && !map->ea)
+		return (map->ea = ft_strtrim(tmp + 3, " \t"), 1);
 	else if (ft_strncmp(tmp, "C ", 1) == 0)
 		return (map->ciel_rgb = convert_rgb(tmp + 2), 1);
 	else if (ft_strncmp(tmp, "F ", 1) == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:56:26 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/20 22:40:02 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/24 09:17:50 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	wall_inter(t_cub *cub, double x, double y)
 	return (0);
 }
 
-void	wall_env(t_cub *cub, struct t_wall_data *data)
+void	wall_env(t_cub *cub, struct s_wall_data *data)
 {
 	float	hit_x;
 

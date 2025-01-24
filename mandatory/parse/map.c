@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 09:09:31 by ael-moua          #+#    #+#             */
-/*   Updated: 2025/01/20 22:26:05 by ael-moua         ###   ########.fr       */
+/*   Updated: 2025/01/24 09:38:17 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	check_map(char **map, t_data *data)
 	data->map = map;
 }
 
-void	build_map(t_map *map, int size, size_t width, t_data *data)
+void	build_map(t_parse_map *map, int size, size_t width, t_data *data)
 {
 	char	**res;
 	int		i;
@@ -97,11 +97,11 @@ void	build_map(t_map *map, int size, size_t width, t_data *data)
 
 void	fill_map(char *str, int fd, t_data *data)
 {
-	t_map	*map;
-	int		height;
-	char	*line;
-	size_t	width;
-	size_t	len;
+	t_parse_map	*map;
+	int			height;
+	char		*line;
+	size_t		width;
+	size_t		len;
 
 	(1) && (map = NULL), (line = NULL), (len = ft_strlen(str));
 	(1) && (height = 1), (width = 0), (line = get_next_line(fd));
