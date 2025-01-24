@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:29:35 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/24 10:15:29 by abennar          ###   ########.fr       */
+/*   Updated: 2025/01/24 09:13:00 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,24 @@ void	trans_data(t_data *data, t_cub *cub)
 	cub->mouse = false;
 }
 
+void	import_sprites(t_cub *cub)
+{
+	int		i;
+	char	*path;
+	char	*png_path;
+
+	i = 0;
+	path = ft_strndup("./frames/", 9);
+	while (i < FRAMES)
+	{
+		png_path = ft_strjoin(path, ft_strjoin(ft_itoa(i), ".png"));
+		cub->anim[i] = mlx_load_png(png_path);
+		if (!cub->anim[i])
+			free_exit(1, cub);
+		i++;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_cub	cub;
@@ -57,5 +75,6 @@ int	main(int ac, char **av)
 	init_map(&map);
 	parse_map(&map, av[1]);
 	trans_data(&map, &cub);
+	import_sprites(&cub);
 	start_the_game(&cub);
 }

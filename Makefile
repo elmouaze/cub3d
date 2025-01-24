@@ -6,7 +6,7 @@
 #    By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/16 22:15:17 by ael-moua          #+#    #+#              #
-#    Updated: 2025/01/24 09:50:19 by abennar          ###   ########.fr        #
+#    Updated: 2025/01/24 10:16:10 by abennar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,11 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -g3 -I mandatory/include/ #-fsanitize=address
 
-SRCS =	.//mandatory/game/animation.c \
-		.//mandatory/game/error_handling.c \
+SRCS =	.//mandatory/game/error_handling.c \
 		.//mandatory/game/game.c \
 		.//mandatory/game/hooks.c \
 		.//mandatory/game/horizontal.c \
 		.//mandatory/game/memory.c \
-		.//mandatory/game/minimap.c \
-		.//mandatory/game/mouse.c \
 		.//mandatory/game/raycasting.c \
 		.//mandatory/game/textures.c \
 		.//mandatory/game/vertical.c \
@@ -45,7 +42,7 @@ SRCS =	.//mandatory/game/animation.c \
 
 
 OBJS = $(SRCS:.c=.o)
-MLX_LIB = libs/libmlx42.a
+MLX_LIB  = libs/libmlx42.a
 GLFW_LIB = libs/libglfw3.a
 FRAMEWORK =  $(MLX_LIB) $(GLFW_LIB) -framework Cocoa -framework OpenGL -framework IOKit 
 

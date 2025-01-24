@@ -1,41 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory.c                                           :+:      :+:    :+:   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 08:58:12 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/24 10:14:55 by abennar          ###   ########.fr       */
+/*   Created: 2024/11/20 08:10:02 by abennar           #+#    #+#             */
+/*   Updated: 2025/01/19 10:10:22 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_exit(int exit_stat, t_cub *cub)
+void	ft_putstr_fd(char *s, int fd)
 {
-	int	i;
+	int	index;
 
-	i = -1;
-	while (++i < 4)
+	index = 0;
+	while (s[index] != '\0')
 	{
-		if (cub->textures[i])
-			mlx_delete_texture(cub->textures[i]);
+		write (fd, &s[index], 1);
+		index++;
 	}
-	if (cub->door)
-		mlx_delete_texture(cub->door);
-	if (cub->img)
-		mlx_delete_image(cub->mlx, cub->img);
-	if (cub->mlx)
-		mlx_terminate(cub->mlx);
-	alloc(0, 0);
-	exit(exit_stat);
-}
-
-void	close_func(void *param)
-{
-	t_cub	*cub;
-
-	cub = (t_cub *)param;
-	free_exit(0, cub);
 }

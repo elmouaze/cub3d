@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 22:36:05 by ael-moua          #+#    #+#             */
-/*   Updated: 2025/01/24 10:12:18 by abennar          ###   ########.fr       */
+/*   Updated: 2025/01/24 10:11:40 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,15 @@ typedef struct s_data
 	int		ciel_rgb;
 	int		floor_rgb;
 }			t_data;
+
+// uint32_t         get_rgba(uint32_t rgb);
+// bonus 
+
+void			minimap(t_cub *cub);
+void			animation(t_cub *cub);
+void			mouse_handler(mouse_key_t key, action_t action, \
+modifier_key_t mods, void *param);
+void			cursor_handler(double xpos, double ypos, void *param);
 
 // game 
 

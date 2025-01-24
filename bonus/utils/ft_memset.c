@@ -1,41 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory.c                                           :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 08:58:12 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/24 10:14:55 by abennar          ###   ########.fr       */
+/*   Created: 2025/01/24 08:50:22 by abennar           #+#    #+#             */
+/*   Updated: 2025/01/24 09:00:53 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_exit(int exit_stat, t_cub *cub)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	int	i;
+	size_t			i;
+	unsigned char	*ptr;
 
-	i = -1;
-	while (++i < 4)
-	{
-		if (cub->textures[i])
-			mlx_delete_texture(cub->textures[i]);
-	}
-	if (cub->door)
-		mlx_delete_texture(cub->door);
-	if (cub->img)
-		mlx_delete_image(cub->mlx, cub->img);
-	if (cub->mlx)
-		mlx_terminate(cub->mlx);
-	alloc(0, 0);
-	exit(exit_stat);
-}
-
-void	close_func(void *param)
-{
-	t_cub	*cub;
-
-	cub = (t_cub *)param;
-	free_exit(0, cub);
+	i = 0;
+	ptr = (unsigned char *)b;
+	while (i < len)
+		ptr[i++] = (unsigned char)c;
+	return (b);
 }

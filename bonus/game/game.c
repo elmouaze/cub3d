@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 17:36:45 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/24 10:12:43 by abennar          ###   ########.fr       */
+/*   Updated: 2025/01/19 10:11:18 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	game_loop(void *param)
 		free_exit(1, cub);
 	}
 	cast_all_rays(cub);
+	animation(cub);
+	minimap(cub);
 	if (mlx_image_to_window(cub->mlx, cub->img, 0, 0) == -1)
 	{
 		ft_perror("mlx Failed");
@@ -96,6 +98,8 @@ void	start_the_game(t_cub *cub)
 	mlx_set_mouse_pos(cub->mlx, S_W / 2, S_H / 2);
 	mlx_loop_hook(cub->mlx, &game_loop, cub);
 	mlx_key_hook(cub->mlx, &key_handler, cub);
+	mlx_mouse_hook(cub->mlx, &mouse_handler, cub);
+	mlx_cursor_hook(cub->mlx, &cursor_handler, cub);
 	mlx_close_hook(cub->mlx, &close_func, cub);
 	mlx_loop(cub->mlx);
 }

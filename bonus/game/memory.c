@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:58:12 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/24 10:14:55 by abennar          ###   ########.fr       */
+/*   Updated: 2025/01/24 08:58:35 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ void	free_exit(int exit_stat, t_cub *cub)
 	{
 		if (cub->textures[i])
 			mlx_delete_texture(cub->textures[i]);
+	}
+	i = -1;
+	while (++i < FRAMES)
+	{
+		if (cub->anim[i])
+			mlx_delete_texture(cub->anim[i]);
 	}
 	if (cub->door)
 		mlx_delete_texture(cub->door);
