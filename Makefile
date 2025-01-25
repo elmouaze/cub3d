@@ -56,7 +56,7 @@ BONUS_SRCS =	bonus/game/animation_bonus.c \
 
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror  
 
 MND_INCLUDE = -I mandatory/include/
 BONUS_INCLUDE = -I bonus/include/ 
@@ -64,21 +64,30 @@ BONUS_INCLUDE = -I bonus/include/
 OBJS = $(SRCS:mandatory/%.c=mandatory/%.o)
 OBJ_BONUS = $(BONUS_SRCS:bonus/%.c=bonus/%.o)
 
-MLX_LIB = libs/libmlx42.a
+# MLX_LIB =	/Users/Desktop/cub3d/libs/MLX42/build/libmlx42.a
+# GLFW_LIB = -L "/Users/abennar/goinfre/homebrew/opt/glfw/lib/" 
+
 GLFW_LIB = libs/libglfw3.a
-FRAMEWORK = $(MLX_LIB) $(GLFW_LIB) -framework Cocoa -framework OpenGL -framework IOKit
+MLX_LIB = libs/libmlx42.a
+
+FRAMEWORK = $(MLX_LIB) $(GLFW_LIB) -framework Cocoa -framework OpenGL -framework IOKit #-lglfw
+
 
 NAME = cub3d
 NAME_BONUS = cub3d_bonus
 
-all: $(NAME)
+all: mlx $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(FRAMEWORK) -o $@ $(OBJS)
 
+mlx : 
+# cd libs/MLX42 && cmake -B build && cmake --build build -j4 
+	
+
 bonus: $(NAME_BONUS)
 
-$(NAME_BONUS): $(OBJ_BONUS)
+$(NAME_BONUS): mlx $(OBJ_BONUS)
 	$(CC) $(CFLAGS) $(FRAMEWORK) -o $@ $(OBJ_BONUS)
 
 mandatory/%.o: mandatory/%.c mandatory/include/cub3d.h mandatory/include/get_next_line.h
@@ -91,5 +100,8 @@ clean:
 	rm -f $(OBJS) $(OBJ_BONUS)
 
 fclean: clean
+	rm -rf /Users/abennar/Desktop/cub3d/libs/MLX42/build
 	rm -f $(NAME) $(NAME_BONUS)
+
+re : fclean all
 
