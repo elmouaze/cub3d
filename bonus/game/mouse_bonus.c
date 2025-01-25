@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse.c                                            :+:      :+:    :+:   */
+/*   mouse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:51:27 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/17 15:06:11 by abennar          ###   ########.fr       */
+/*   Updated: 2025/01/25 11:08:08 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "cub3d_bonus.h"
 
 void	mouse_handler(mouse_key_t key, action_t action, \
 modifier_key_t mods, void *param)

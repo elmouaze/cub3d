@@ -6,7 +6,7 @@
 /*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:39:14 by abennar           #+#    #+#             */
-/*   Updated: 2024/10/27 14:24:04 by abennar          ###   ########.fr       */
+/*   Updated: 2025/01/25 11:08:08 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <errno.h> 
-# include "cub3d.h"
+# include "cub3d_bonus.h"
 
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strndup(char *str, size_t len);

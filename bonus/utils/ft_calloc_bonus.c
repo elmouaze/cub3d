@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   ft_calloc_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 08:10:02 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/19 10:10:22 by abennar          ###   ########.fr       */
+/*   Created: 2024/11/19 03:16:03 by ael-moua          #+#    #+#             */
+/*   Updated: 2025/01/25 11:08:08 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_bzero(void *s, size_t n)
 {
-	int	index;
+	size_t	index;
 
 	index = 0;
-	while (s[index] != '\0')
+	while (n > index)
 	{
-		write (fd, &s[index], 1);
+		((char *)s)[index] = 0;
 		index++;
 	}
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*p;
+
+	p = (void *)alloc(1, size * count);
+	if (!p)
+		alloc(0, 0);
+	ft_bzero(p, count * size);
+	return (p);
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   animation.c                                        :+:      :+:    :+:   */
+/*   animation_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 03:20:21 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/17 13:48:57 by abennar          ###   ########.fr       */
+/*   Updated: 2025/01/25 11:08:08 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "cub3d_bonus.h"
 
 uint	rgb2rgba(mlx_texture_t *texture, int x, int y)
 {

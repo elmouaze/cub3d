@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   ft_strlen_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 08:10:02 by abennar           #+#    #+#             */
-/*   Updated: 2025/01/19 10:10:22 by abennar          ###   ########.fr       */
+/*   Created: 2023/11/03 19:03:03 by ael-moua          #+#    #+#             */
+/*   Updated: 2025/01/25 11:08:08 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
-void	ft_putstr_fd(char *s, int fd)
+size_t	ft_strlen(const char *s)
 {
-	int	index;
+	size_t	size;
 
-	index = 0;
-	while (s[index] != '\0')
-	{
-		write (fd, &s[index], 1);
-		index++;
-	}
+	size = 0;
+	while (s && s[size])
+		size++;
+	return (size);
 }
