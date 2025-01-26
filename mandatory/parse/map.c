@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 09:09:31 by ael-moua          #+#    #+#             */
-/*   Updated: 2025/01/24 09:38:17 by abennar          ###   ########.fr       */
+/*   Updated: 2025/01/26 18:54:35 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	player_handler(int x, int y, t_data *data)
 
 void	map_error(char **map, int i, int j)
 {
-	if ((map[i][j] == '0' || map[i][j] == 'D'))
+	if (map[i][j] == '0')
 	{
 		if (j == 0 || map[i][j - 1] == ' ')
 			ft_perror("Error: Unclosed map");
@@ -32,15 +32,6 @@ void	map_error(char **map, int i, int j)
 			ft_perror("Error: Unclosed map");
 		else if (!map[i + 1] || map[i + 1][j] == ' ' || map[i + 1][j] == 0)
 			ft_perror("Error: Unclosed map");
-	}
-	if (map[i][j] == 'D')
-	{
-		if (map[i][j - 1] == 'D' || map[i][j + 1] == 'D'
-		|| map[i + 1][j] == 'D' || map[i - 1][j] == 'D')
-			ft_perror("Error: Multiple Doors near each other ");
-		if (((map[i][j - 1] == '1') + (map[i][j + 1] == '1') != 2)
-			&& ((map[i + 1][j] == '1') + (map[i - 1][j] == '1') != 2))
-			ft_perror("Error: A door without a wall");
 	}
 }
 
