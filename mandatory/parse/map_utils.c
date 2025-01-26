@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ael-moua <ael-moua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 22:12:40 by ael-moua          #+#    #+#             */
-/*   Updated: 2025/01/24 09:35:20 by abennar          ###   ########.fr       */
+/*   Updated: 2025/01/26 19:25:35 by ael-moua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	is_player(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
-	if (c != '0' && c != '1' && c != ' ' && c != 'D')
+	if (c != '0' && c != '1' && c != ' ' )
 		return (ft_perror("Error: Forbidden symbols"), 1);
 	return (0);
 }
